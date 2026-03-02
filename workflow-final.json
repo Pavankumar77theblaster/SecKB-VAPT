@@ -1,0 +1,401 @@
+{
+  "id": "d13b319c-917c-4833-8011-f475b2b3c807",
+  "versionId": "03a58012-c4e9-4f18-9ad5-c5e4b6242bde",
+  "name": "Security KB \u2014 Auto Pipeline v2 (80+ Sources, VAPT Path)",
+  "active": false,
+  "pinData": {},
+  "staticData": null,
+  "nodes": [
+    {
+      "id": "912c5ed2-9cbf-48c5-a189-8668948b7eba",
+      "name": "Schedule \u2014 Every 2 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        400
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "f25a5f0c-5c87-4950-8bd8-d099c117ee75",
+      "name": "Define All RSS Sources",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        400
+      ],
+      "parameters": {
+        "jsCode": "\nconst feeds = [\n  // \u2500\u2500 LEVEL 0: FOUNDATION \u2500\u2500\n  { url: 'https://portswigger.net/blog/rss',                  level: 'Foundation', label: 'PortSwigger Blog' },\n  { url: 'https://medium.com/feed/tag/web-development',       level: 'Foundation', label: 'Web Development' },\n  { url: 'https://medium.com/feed/tag/http',                  level: 'Foundation', label: 'HTTP Concepts' },\n  { url: 'https://owasp.org/blog/feed.xml',                   level: 'Foundation', label: 'OWASP Blog' },\n  { url: 'https://medium.com/feed/tag/web-application',       level: 'Foundation', label: 'Web Apps' },\n\n  // \u2500\u2500 LEVEL 1: RECON \u2500\u2500\n  { url: 'https://medium.com/feed/tag/reconnaissance',        level: 'Recon', label: 'Recon' },\n  { url: 'https://medium.com/feed/tag/osint',                 level: 'Recon', label: 'OSINT' },\n  { url: 'https://medium.com/feed/tag/bug-bounty-tips',       level: 'Recon', label: 'Bug Bounty Tips' },\n  { url: 'https://medium.com/feed/tag/subdomain',             level: 'Recon', label: 'Subdomain Enum' },\n  { url: 'https://medium.com/feed/tag/information-gathering', level: 'Recon', label: 'Info Gathering' },\n  { url: 'https://medium.com/feed/tag/nmap',                  level: 'Recon', label: 'Nmap' },\n  { url: 'https://medium.com/feed/tag/burp-suite',            level: 'Recon', label: 'Burp Suite' },\n  { url: 'https://medium.com/feed/tag/dorking',               level: 'Recon', label: 'Google Dorking' },\n  { url: 'https://medium.com/feed/tag/shodan',                level: 'Recon', label: 'Shodan' },\n\n  // \u2500\u2500 LEVEL 2: LOW \u2500\u2500\n  { url: 'https://medium.com/feed/tag/clickjacking',          level: 'Low', label: 'Clickjacking' },\n  { url: 'https://medium.com/feed/tag/open-redirect',         level: 'Low', label: 'Open Redirect' },\n  { url: 'https://medium.com/feed/tag/information-disclosure',level: 'Low', label: 'Info Disclosure' },\n  { url: 'https://medium.com/feed/tag/cors',                  level: 'Low', label: 'CORS Misconfig' },\n  { url: 'https://medium.com/feed/tag/security-headers',      level: 'Low', label: 'Security Headers' },\n  { url: 'https://medium.com/feed/tag/subdomain-takeover',    level: 'Low', label: 'Subdomain Takeover' },\n  { url: 'https://medium.com/feed/tag/host-header',           level: 'Low', label: 'Host Header Injection' },\n\n  // \u2500\u2500 LEVEL 3: MEDIUM \u2500\u2500\n  { url: 'https://medium.com/feed/tag/xss',                   level: 'Medium', label: 'XSS' },\n  { url: 'https://medium.com/feed/tag/csrf',                  level: 'Medium', label: 'CSRF' },\n  { url: 'https://medium.com/feed/tag/idor',                  level: 'Medium', label: 'IDOR' },\n  { url: 'https://medium.com/feed/tag/cross-site-scripting',  level: 'Medium', label: 'Cross Site Scripting' },\n  { url: 'https://medium.com/feed/tag/broken-access-control', level: 'Medium', label: 'Broken Access Control' },\n  { url: 'https://medium.com/feed/tag/path-traversal',        level: 'Medium', label: 'Path Traversal' },\n  { url: 'https://medium.com/feed/tag/file-upload',           level: 'Medium', label: 'File Upload' },\n  { url: 'https://medium.com/feed/tag/business-logic',        level: 'Medium', label: 'Business Logic' },\n  { url: 'https://medium.com/feed/tag/mass-assignment',       level: 'Medium', label: 'Mass Assignment' },\n\n  // \u2500\u2500 LEVEL 4: HIGH \u2500\u2500\n  { url: 'https://medium.com/feed/tag/sql-injection',         level: 'High', label: 'SQL Injection' },\n  { url: 'https://medium.com/feed/tag/ssrf',                  level: 'High', label: 'SSRF' },\n  { url: 'https://medium.com/feed/tag/xxe',                   level: 'High', label: 'XXE' },\n  { url: 'https://medium.com/feed/tag/command-injection',     level: 'High', label: 'Command Injection' },\n  { url: 'https://medium.com/feed/tag/file-inclusion',        level: 'High', label: 'File Inclusion' },\n  { url: 'https://medium.com/feed/tag/authentication',        level: 'High', label: 'Authentication' },\n  { url: 'https://medium.com/feed/tag/ssti',                  level: 'High', label: 'SSTI' },\n  { url: 'https://medium.com/feed/tag/template-injection',    level: 'High', label: 'Template Injection' },\n  { url: 'https://medium.com/feed/tag/web-exploitation',      level: 'High', label: 'Web Exploitation' },\n  { url: 'https://medium.com/feed/tag/owasp',                 level: 'High', label: 'OWASP' },\n  { url: 'https://medium.com/feed/tag/ldap-injection',        level: 'High', label: 'LDAP Injection' },\n\n  // \u2500\u2500 LEVEL 5: CRITICAL \u2500\u2500\n  { url: 'https://medium.com/feed/tag/remote-code-execution', level: 'Critical', label: 'RCE' },\n  { url: 'https://medium.com/feed/tag/rce',                   level: 'Critical', label: 'RCE Direct' },\n  { url: 'https://medium.com/feed/tag/privilege-escalation',  level: 'Critical', label: 'Privilege Escalation' },\n  { url: 'https://medium.com/feed/tag/account-takeover',      level: 'Critical', label: 'Account Takeover' },\n  { url: 'https://medium.com/feed/tag/deserialization',       level: 'Critical', label: 'Deserialization' },\n  { url: 'https://medium.com/feed/tag/prototype-pollution',   level: 'Critical', label: 'Prototype Pollution' },\n  { url: 'https://medium.com/feed/tag/race-condition',        level: 'Critical', label: 'Race Condition' },\n\n  // \u2500\u2500 LEVEL 6: ADVANCED \u2500\u2500\n  { url: 'https://medium.com/feed/tag/api-security',          level: 'Advanced', label: 'API Security' },\n  { url: 'https://medium.com/feed/tag/graphql',               level: 'Advanced', label: 'GraphQL' },\n  { url: 'https://medium.com/feed/tag/oauth',                 level: 'Advanced', label: 'OAuth 2.0' },\n  { url: 'https://medium.com/feed/tag/jwt',                   level: 'Advanced', label: 'JWT Attacks' },\n  { url: 'https://medium.com/feed/tag/saml',                  level: 'Advanced', label: 'SAML' },\n  { url: 'https://medium.com/feed/tag/websockets',            level: 'Advanced', label: 'WebSockets' },\n  { url: 'https://medium.com/feed/tag/rest-api',              level: 'Advanced', label: 'REST API' },\n  { url: 'https://medium.com/feed/tag/http-request-smuggling',level: 'Advanced', label: 'Request Smuggling' },\n  { url: 'https://medium.com/feed/tag/cache-poisoning',       level: 'Advanced', label: 'Cache Poisoning' },\n\n  // \u2500\u2500 LEVEL 7: EXPERT \u2500\u2500\n  { url: 'https://medium.com/feed/tag/cloud-security',        level: 'Expert', label: 'Cloud Security' },\n  { url: 'https://medium.com/feed/tag/aws-security',          level: 'Expert', label: 'AWS Security' },\n  { url: 'https://medium.com/feed/tag/kubernetes',            level: 'Expert', label: 'Kubernetes Security' },\n  { url: 'https://medium.com/feed/tag/red-team',              level: 'Expert', label: 'Red Team' },\n  { url: 'https://medium.com/feed/tag/lateral-movement',      level: 'Expert', label: 'Lateral Movement' },\n  { url: 'https://medium.com/feed/tag/supply-chain',          level: 'Expert', label: 'Supply Chain' },\n\n  // \u2500\u2500 TOP PUBLICATIONS \u2500\u2500\n  { url: 'https://medium.com/feed/bugbountywriteup',          level: null, label: 'BugBountyWriteup' },\n  { url: 'https://medium.com/feed/system-weakness',           level: null, label: 'System Weakness' },\n  { url: 'https://medium.com/feed/@infosecwriteups',          level: null, label: 'InfosecWriteups' },\n  { url: 'https://medium.com/feed/pentester-hub',             level: null, label: 'Pentester Hub' },\n  { url: 'https://medium.com/feed/the-hackers-meetup',        level: null, label: 'Hackers Meetup' },\n\n  // \u2500\u2500 EXTERNAL WORLD-CLASS SOURCES \u2500\u2500\n  { url: 'https://googleprojectzero.blogspot.com/feeds/posts/default', level: 'Expert', label: 'Google Project Zero' },\n  { url: 'https://github.blog/security/feed/',                level: 'Expert', label: 'GitHub Security' },\n  { url: 'https://www.reddit.com/r/netsec/.rss',              level: null, label: 'Reddit r/netsec' },\n  { url: 'https://www.reddit.com/r/bugbounty/.rss',           level: null, label: 'Reddit r/bugbounty' },\n  { url: 'https://www.reddit.com/r/websecurity/.rss',         level: null, label: 'Reddit r/websecurity' },\n  { url: 'https://www.reddit.com/r/hacking/.rss',             level: null, label: 'Reddit r/hacking' },\n  { url: 'https://blog.assetnote.io/feed.xml',                level: 'Advanced', label: 'AssetNote' },\n  { url: 'https://www.hackerone.com/blog.rss',                level: null, label: 'HackerOne Blog' },\n  { url: 'https://labs.detectify.com/feed/',                  level: 'Advanced', label: 'Detectify Labs' },\n\n  // \u2500\u2500 GENERAL TAGS \u2500\u2500\n  { url: 'https://medium.com/feed/tag/penetration-testing',   level: null, label: 'Penetration Testing' },\n  { url: 'https://medium.com/feed/tag/ethical-hacking',       level: null, label: 'Ethical Hacking' },\n  { url: 'https://medium.com/feed/tag/bug-bounty',            level: null, label: 'Bug Bounty' },\n  { url: 'https://medium.com/feed/tag/cybersecurity',         level: null, label: 'Cybersecurity' },\n  { url: 'https://medium.com/feed/tag/ctf',                   level: null, label: 'CTF Writeups' },\n  { url: 'https://medium.com/feed/tag/cve',                   level: null, label: 'CVE Analysis' },\n  { url: 'https://medium.com/feed/tag/exploit',               level: null, label: 'Exploits' },\n  { url: 'https://medium.com/feed/tag/zero-day',              level: null, label: 'Zero Days' },\n  { url: 'https://medium.com/feed/tag/waf-bypass',            level: 'Advanced', label: 'WAF Bypass' },\n  { url: 'https://medium.com/feed/tag/filter-bypass',         level: 'Advanced', label: 'Filter Bypass' },\n  { url: 'https://medium.com/feed/tag/payload',               level: null, label: 'Payload Research' },\n];\n\nconsole.log(`Loaded ${feeds.length} RSS sources`);\nreturn feeds.map(f => ({ json: f }));\n"
+      }
+    },
+    {
+      "id": "0734741a-54b6-4e14-826d-28b9f4cf8db4",
+      "name": "Fetch RSS Feed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        400
+      ],
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          },
+          "redirect": {
+            "redirect": {
+              "followRedirects": true,
+              "maxRedirects": 3
+            }
+          },
+          "timeout": 20000
+        }
+      }
+    },
+    {
+      "id": "81d59730-b9bd-4e40-bf2b-2e1e447cccc5",
+      "name": "Parse RSS \u2014 Extract Articles",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        400
+      ],
+      "parameters": {
+        "jsCode": "// Parse RSS XML and extract article links + titles\nconst xml = $input.first().json.data || '';\nconst feedMeta = $('Define All RSS Sources').first().json;\n\n// Extract items from RSS XML using regex\nconst items = [];\nconst itemMatches = xml.match(/<item[^>]*>[\\s\\S]*?<\\/item>/gi) || [];\n\n// Cut-off: only articles from last 2 hours\nconst cutoff = Date.now() - (2 * 60 * 60 * 1000);\n\nfor (const item of itemMatches.slice(0, 15)) { // max 15 per feed\n  const titleMatch  = item.match(/<title>(?:<!\\[CDATA\\[)?([^\\]<]+?)(?:\\]\\]>)?<\\/title>/i);\n  const linkMatch   = item.match(/<link>([^<]+)<\\/link>/i) ||\n                      item.match(/<link[^>]+href=\"([^\"]+)\"/i);\n  const dateMatch   = item.match(/<pubDate>([^<]+)<\\/pubDate>/i) ||\n                      item.match(/<published>([^<]+)<\\/published>/i) ||\n                      item.match(/<updated>([^<]+)<\\/updated>/i);\n\n  const link  = linkMatch?.[1]?.trim();\n  const title = titleMatch?.[1]?.trim() || 'Untitled';\n  const dateStr = dateMatch?.[1]?.trim();\n  const pubTime = dateStr ? new Date(dateStr).getTime() : Date.now();\n\n  // Skip if older than 2 hours (unless feed_level is set, then always include to build initial DB)\n  // Allow all for first 30 days to build knowledge base\n  if (!link || !link.startsWith('http')) continue;\n\n  // Skip non-article links (tag pages, author pages)\n  if (!link.includes('medium.com/') && !link.includes('reddit.com/r/') &&\n      !link.includes('portswigger.net/') && !link.includes('google.com/')) continue;\n\n  items.push({\n    json: {\n      link: link,\n      title: title,\n      pub_date: dateStr || new Date().toISOString(),\n      feed_level: feedMeta.level,\n      feed_label: feedMeta.label,\n      feed_url: feedMeta.url\n    }\n  });\n}\n\nconsole.log(`Feed: ${feedMeta.label} \u2192 ${items.length} articles`);\nreturn items;"
+      }
+    },
+    {
+      "id": "57e370c4-166e-4c6a-8d44-32d2da08d182",
+      "name": "Dedup \u2014 Skip Already Saved",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        400
+      ],
+      "parameters": {
+        "jsCode": "// Check if article URL already exists in dashboard\nconst https = require('https');\nconst http = require('http');\nconst item = $input.first().json;\n\nconst exists = await new Promise((resolve) => {\n  const url = `http://localhost:3000/api/check-url?url=${encodeURIComponent(item.link)}`;\n  http.get(url, (res) => {\n    let data = '';\n    res.on('data', d => data += d);\n    res.on('end', () => {\n      try { resolve(JSON.parse(data).exists); }\n      catch(e) { resolve(false); }\n    });\n  }).on('error', () => resolve(false));\n});\n\nif (exists) {\n  console.log('SKIP (already saved):', item.title?.substring(0, 50));\n  return [];\n}\n\nreturn [{ json: item }];"
+      }
+    },
+    {
+      "id": "70ff2bbb-fccc-4b8e-aa8e-11edba053e2d",
+      "name": "Fetch Full Article (Freedium bypass)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        400
+      ],
+      "parameters": {
+        "url": "=https://freedium.cfd/{{ $json.link }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          },
+          "redirect": {
+            "redirect": {
+              "followRedirects": true,
+              "maxRedirects": 3
+            }
+          },
+          "timeout": 25000
+        }
+      }
+    },
+    {
+      "id": "81716495-9d2d-48fd-9ce8-f7ce37caec47",
+      "name": "Extract & Validate Article Text",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        400
+      ],
+      "parameters": {
+        "jsCode": "const html = $input.first().json.data || '';\nconst meta = $('Dedup \u2014 Skip Already Saved').first().json;\n\n// Strip HTML tags and clean text\nconst text = html\n  .replace(/<script[\\s\\S]*?<\\/script>/gi, '')\n  .replace(/<style[\\s\\S]*?<\\/style>/gi, '')\n  .replace(/<[^>]+>/g, ' ')\n  .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')\n  .replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\").replace(/&nbsp;/g, ' ')\n  .replace(/\\s{2,}/g, ' ').trim();\n\n// Require at least 400 chars \u2014 less = paywalled or failed\nif (text.length < 400) {\n  console.log('SKIP (too short / paywalled):', meta.title?.substring(0, 50));\n  return [];\n}\n\nreturn [{ json: {\n  ...meta,\n  article_text: text.substring(0, 14000)\n} }];"
+      }
+    },
+    {
+      "id": "8a1df154-b3c0-40da-aacb-9804dcf83987",
+      "name": "Gemini \u2014 Score + Classify + VAPT Level",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        400
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={{ $env.GEMINI_API_KEY }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are a senior penetration tester grading security articles for a VAPT learning curriculum.\\n\\nScore 1-10 based on practical value:\\n- 9-10: Original research, real bug bounty report, novel technique, real PoC with commands\\n- 7-8: Good technical walkthrough, working exploitation demo, detailed CTF writeup\\n- 5-6: Decent tutorial with some practical value\\n- 3-4: Generic tips, theory only, no exploitation detail\\n- 1-2: Clickbait, marketing, non-technical\\n\\nReturn ONLY valid JSON, absolutely no markdown:\\n{\\n  \\\"score\\\": 8,\\n  \\\"skip\\\": false,\\n  \\\"vapt_level\\\": \\\"one of: Foundation | Recon | Low | Medium | High | Critical | Advanced | Expert\\\",\\n  \\\"category\\\": \\\"one of: Recon & Enumeration | Client-Side Attacks | Injection Attacks | Broken Access Control | Authentication & Sessions | Server-Side Attacks | API & Web Services | Cloud & Infrastructure | Exploit Chaining | Web Fundamentals\\\",\\n  \\\"vulnerability_type\\\": \\\"one of: XSS | CSRF | SQLi | SSRF | XXE | RCE | IDOR | Auth Bypass | SSTI | Open Redirect | Clickjacking | CORS | JWT Attack | OAuth Attack | GraphQL | Deserialization | File Upload | Path Traversal | Subdomain Takeover | Command Injection | Business Logic | Race Condition | Prototype Pollution | Misconfiguration | Info Disclosure | Other\\\",\\n  \\\"severity\\\": \\\"one of: Critical | High | Medium | Low | Info\\\",\\n  \\\"tools_mentioned\\\": [\\\"tool1\\\", \\\"tool2\\\"],\\n  \\\"one_line_summary\\\": \\\"One precise technical sentence about what this article demonstrates\\\",\\n  \\\"beginner_context\\\": \\\"In 2 sentences: explain this vulnerability type to a beginner with zero security knowledge \u2014 what is it, why does it exist\\\"\\n}\\n\\nIf NOT about security/hacking/pentesting at all, return: {\\\"skip\\\": true, \\\"score\\\": 0}\\n\\nArticle Title: {{ $json.title }}\\nHint from RSS feed: {{ $json.feed_label }}\\n\\nArticle content:\\n{{ $json.article_text }}\"\n    }]\n  }],\n  \"generationConfig\": { \"temperature\": 0.0, \"maxOutputTokens\": 600 }\n}",
+        "options": {
+          "timeout": 45000
+        }
+      }
+    },
+    {
+      "id": "1927820f-a2fe-490a-8315-692acfefb829",
+      "name": "Parse Gemini \u2014 Filter Low Scores",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        400
+      ],
+      "parameters": {
+        "jsCode": "try {\n  const raw = $input.first().json.candidates?.[0]?.content?.parts?.[0]?.text || '';\n  const cleaned = raw.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  const gemini = JSON.parse(cleaned);\n\n  if (gemini.skip || !gemini.score || gemini.score < 6) {\n    const meta = $('Extract & Validate Article Text').first().json;\n    console.log(`TRASH (score ${gemini.score}): ${meta.title?.substring(0,50)}`);\n    return [];\n  }\n\n  const articleData = $('Extract & Validate Article Text').first().json;\n\n  // Use feed_level as fallback for vapt_level if Gemini doesn't determine one\n  const vapt_level = gemini.vapt_level || articleData.feed_level || 'Medium';\n\n  return [{ json: {\n    ...articleData,\n    quality_score:   gemini.score,\n    vapt_level:      vapt_level,\n    category:        gemini.category || 'Web Fundamentals',\n    vulnerability_type: gemini.vulnerability_type || 'Other',\n    severity:        gemini.severity || 'Medium',\n    tools_mentioned: gemini.tools_mentioned || [],\n    one_line_summary: gemini.one_line_summary || '',\n    beginner_context: gemini.beginner_context || ''\n  } }];\n} catch(e) {\n  console.log('Gemini parse error:', e.message);\n  return [];\n}"
+      }
+    },
+    {
+      "id": "f9905645-544f-44a8-ac5d-86d9ff396dce",
+      "name": "Groq \u2014 Write Full Pentest Notes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1980,
+        400
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "{\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"temperature\": 0.15,\n  \"max_tokens\": 5000,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a senior Red Team pentester and security educator. Your notes serve TWO audiences simultaneously: (1) complete beginners who need simple explanations and analogies, and (2) experienced pentesters who need precise commands and bypass techniques. Write for both. Return ONLY valid JSON, absolutely no markdown backticks.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Article: {{ $json.title }}\\nVAPT Level: {{ $json.vapt_level }} | Category: {{ $json.category }} | Vuln: {{ $json.vulnerability_type }} | Severity: {{ $json.severity }}\\nSummary: {{ $json.one_line_summary }}\\n\\nFull article:\\n{{ $json.article_text }}\\n\\n---\\nCreate comprehensive educational pentest notes as this exact JSON (all fields required):\\n{\\n  \\\"what_is_it\\\": \\\"ELI5 explanation for a complete beginner. What is this vulnerability? Why does it exist? What does an attacker gain? Use a real-world analogy (not IT-related) to make it memorable. 3-5 sentences max.\\\",\\n  \\\"mental_model\\\": \\\"ONE powerful analogy that makes this vulnerability click instantly. Example format: '[Vuln] is like [real-world scenario] \u2014 the developer [mistake], the attacker [what they do], and the result is [impact]'. Make it so memorable they never forget it.\\\",\\n  \\\"memory_hook\\\": \\\"A single punchy sentence or acronym to remember this technique forever. Make it rhyme, use alliteration, or be shocking/funny. Should stick in memory immediately.\\\",\\n  \\\"where_to_look\\\": \\\"Exactly WHERE in a web application this vulnerability hides. List: specific HTTP methods (GET/POST/PUT), content-types (JSON/XML/multipart), application flows (login/logout/password-reset/export/webhook/import/redirect), URL patterns, and request parameters that commonly contain this vuln. Be specific \u2014 not 'look for user input' but 'look for PDF export features, image URL parameters, and webhook configuration endpoints'.\\\",\\n  \\\"behavioral_indicators\\\": \\\"HOW TO DETECT this vulnerability from server BEHAVIOR \u2014 not parameter names (which devs obfuscate). List: response time differences (blind detection), error message patterns that leak information, HTTP status code patterns, response size differences, out-of-band detection methods (DNS pingback). This works even when all params are renamed to random strings.\\\",\\n  \\\"how_to_find_it\\\": \\\"Step-by-step recon and discovery methodology. Tool commands to run first. Burp Suite settings to enable. grep patterns for JS/source code. Specific behaviors to trigger. Order from passive to active testing.\\\",\\n  \\\"root_cause\\\": \\\"What exact developer mistake caused this. Name the specific function, parameter, library, or config that was wrong. Precise enough that a developer immediately knows what to fix.\\\",\\n  \\\"exploitation_walkthrough\\\": \\\"Numbered step-by-step exploitation. Setup \u2192 Discovery \u2192 Confirmation \u2192 Exploit \u2192 Escalation. Use exact tool commands, curl requests, Burp steps. Specific to this article's technique.\\\",\\n  \\\"payloads_and_commands\\\": \\\"Every specific payload, curl command, Burp step, tool invocation that applies. Ready-to-copy format. Include tool flags and exact syntax.\\\",\\n  \\\"payload_mutations\\\": \\\"CRITICAL SECTION \u2014 What to do when basic payloads fail. For this specific vuln type, list:\\n1. URL encoding variants (single, double, triple encode)\\n2. Case variation techniques\\n3. Comment/whitespace insertion\\n4. Unicode/UTF-8 bypass\\n5. Parameter pollution (same param twice)\\n6. HTTP method switching (POST\u2192PUT\u2192PATCH)\\n7. Content-type switching (JSON\u2192XML\u2192form-data)\\n8. Chunked encoding bypass\\n9. Null byte insertion\\n10. WAF-specific bypass patterns\\nFor each: show the original payload and the mutated version side-by-side.\\\",\\n  \\\"custom_header_guide\\\": \\\"Headers relevant to this vulnerability type. List:\\n1. Standard headers to test (X-Forwarded-For, X-Real-IP, X-Original-URL, X-Rewrite-URL, Host, Origin, Referer, Content-Type, Transfer-Encoding)\\n2. How to enumerate unknown custom headers (wordlist brute force with ffuf, Burp Intruder)\\n3. What behavior change indicates a header is being processed\\n4. Specific header injection payloads for this vuln type\\n5. Header value manipulation techniques\\\",\\n  \\\"real_world_scenario\\\": \\\"You are testing a hardened enterprise app with: WAF enabled, all parameter names randomized (no obvious ?url= or ?redirect=), custom headers with unknown names, responses are normalized (all return 200 OK). Step-by-step: how would you STILL find and confirm this specific vulnerability? Focus on behavior-based detection, timing attacks, and out-of-band techniques.\\\",\\n  \\\"impact\\\": \\\"Concrete attacker outcomes with specifics. Not generic \u2014 explain exactly what data/access/damage results.\\\",\\n  \\\"chaining_opportunities\\\": \\\"3 specific vuln chains. Format: [VulnA] + [VulnB] \u2192 [Exact Result]. Be specific about how the chain works mechanically.\\\",\\n  \\\"detection_and_hunting\\\": \\\"Active hunting techniques: Burp extensions to install, nuclei templates to run, grep patterns, log indicators, Burp Collaborator usage for blind detection.\\\",\\n  \\\"remediation\\\": \\\"Specific developer fix: exact code change, config update, library version. Not generic advice.\\\",\\n  \\\"key_takeaways\\\": \\\"5 bullet points. Start each with action verb. Specific and immediately actionable.\\\",\\n  \\\"difficulty_tips\\\": \\\"Advice for the {{ $json.vapt_level }} level learner: prerequisites needed, what to study before this, what comes next, related techniques to learn.\\\"\\n}\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 90000
+        }
+      }
+    },
+    {
+      "id": "c7fb09b7-4d3b-4304-8878-ce1ffd5e3a69",
+      "name": "Parse Groq + Build Final Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2200,
+        400
+      ],
+      "parameters": {
+        "jsCode": "\ntry {\n  const groqRaw = $input.first().json.choices?.[0]?.message?.content || '';\n  const cleaned = groqRaw.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  const notes = JSON.parse(cleaned);\n  const d = $('Parse Gemini \u2014 Filter Low Scores').first().json;\n  const today = new Date().toISOString().split('T')[0];\n\n  const safeTitle = d.title.replace(/[^a-zA-Z0-9\\s-]/g, '').replace(/\\s+/g, '-').toLowerCase().substring(0, 65);\n\n  // Rich Obsidian markdown with all new sections\n  const obsidianContent = [\n    '---',\n    `title: \"${d.title.replace(/\"/g, \"'\")}\"`,\n    `vapt_level: ${d.vapt_level}`,\n    `category: ${d.category}`,\n    `vulnerability_type: ${d.vulnerability_type}`,\n    `severity: ${d.severity}`,\n    `quality_score: ${d.quality_score}`,\n    `source: \"${d.link}\"`,\n    `date_added: ${today}`,\n    `status: new`,\n    `tags: [${d.vapt_level.toLowerCase()}, ${d.vulnerability_type.toLowerCase().replace(/[\\s&\\/]+/g, '-')}]`,\n    '---',\n    '',\n    `# ${d.title}`,\n    '',\n    `> \ud83c\udfaf **Level:** ${d.vapt_level} | **Severity:** ${d.severity} | **Score:** ${d.quality_score}/10`,\n    `> \ud83d\udcce **Source:** [Original](${d.link})`,\n    '',\n    `> \ud83d\udca1 ${d.one_line_summary}`,\n    '',\n    `## \ud83d\udca1 Memory Hook`,\n    '',\n    notes.memory_hook || '',\n    '',\n    `## \ud83e\udde0 Mental Model (Understand It Instantly)`,\n    '',\n    notes.mental_model || '',\n    '',\n    `## \ud83d\udd30 What Is This? (Beginner Friendly)`,\n    '',\n    notes.what_is_it || '',\n    '',\n    `## \ud83d\udd0d Where To Look`,\n    '',\n    notes.where_to_look || '',\n    '',\n    `## \ud83d\udc41\ufe0f Behavioral Indicators (Works Even When Params Are Obfuscated)`,\n    '',\n    notes.behavioral_indicators || '',\n    '',\n    `## \ud83d\udd75\ufe0f Real-World Finding Guide (WAF + Obfuscated App)`,\n    '',\n    notes.real_world_scenario || '',\n    '',\n    `## \ud83e\udde0 Root Cause (Developer Mistake)`,\n    '',\n    notes.root_cause || '',\n    '',\n    `## \ud83c\udfaf Exploitation Walkthrough`,\n    '',\n    notes.how_to_find_it || '',\n    '',\n    notes.exploitation_walkthrough || '',\n    '',\n    `## \ud83d\udca3 Payloads & Commands`,\n    '',\n    '```',\n    notes.payloads_and_commands || '',\n    '```',\n    '',\n    `## \ud83d\udd00 When Basic Payloads Fail (Mutations & WAF Bypass)`,\n    '',\n    notes.payload_mutations || '',\n    '',\n    `## \ud83d\udce1 Custom Header Testing Guide`,\n    '',\n    notes.custom_header_guide || '',\n    '',\n    `## \ud83d\udca5 Impact`,\n    '',\n    notes.impact || '',\n    '',\n    `## \ud83d\udd17 Chaining Opportunities`,\n    '',\n    notes.chaining_opportunities || '',\n    '',\n    `## \ud83d\udd0e Detection & Hunting`,\n    '',\n    notes.detection_and_hunting || '',\n    '',\n    `## \ud83d\udee1\ufe0f Remediation`,\n    '',\n    notes.remediation || '',\n    '',\n    `## \u26a1 Key Takeaways`,\n    '',\n    notes.key_takeaways || '',\n    '',\n    `## \ud83d\udcda Level Tips (${d.vapt_level})`,\n    '',\n    notes.difficulty_tips || '',\n  ].join('\\n');\n\n  return [{ json: {\n    date_added: today,\n    title: d.title,\n    vapt_level: d.vapt_level,\n    category: d.category,\n    vulnerability_type: d.vulnerability_type,\n    severity: d.severity,\n    quality_score: d.quality_score,\n    tools_used: d.tools_mentioned || [],\n    source_url: d.link,\n    one_line_summary: d.one_line_summary || '',\n    beginner_context: d.beginner_context || '',\n    // New educational fields\n    what_is_it:               notes.what_is_it || '',\n    mental_model:             notes.mental_model || '',\n    memory_hook:              notes.memory_hook || '',\n    where_to_look:            notes.where_to_look || '',\n    behavioral_indicators:    notes.behavioral_indicators || '',\n    how_to_find_it:           notes.how_to_find_it || '',\n    root_cause:               notes.root_cause || '',\n    exploitation_walkthrough: notes.exploitation_walkthrough || '',\n    payloads_and_commands:    notes.payloads_and_commands || '',\n    payload_mutations:        notes.payload_mutations || '',\n    custom_header_guide:      notes.custom_header_guide || '',\n    real_world_scenario:      notes.real_world_scenario || '',\n    impact:                   notes.impact || '',\n    chaining_opportunities:   notes.chaining_opportunities || '',\n    detection_and_hunting:    notes.detection_and_hunting || '',\n    remediation:              notes.remediation || '',\n    key_takeaways:            notes.key_takeaways || '',\n    difficulty_tips:          notes.difficulty_tips || '',\n    status: 'new',\n    obsidian_folder:   d.vapt_level.replace(/\\s+/g, '-'),\n    obsidian_filename: `${today}-${safeTitle}`,\n    obsidian_content:  obsidianContent\n  } }];\n} catch(e) {\n  console.log('Groq parse error:', e.message);\n  return [];\n}\n"
+      }
+    },
+    {
+      "id": "09811a8b-aca9-4344-a359-2fbbd5823964",
+      "name": "POST to Web Dashboard",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2420,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3000/api/articles",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 10000
+        }
+      }
+    },
+    {
+      "id": "c15dfcd0-65b6-47f6-a863-08d5b8fcb0cc",
+      "name": "Write to Obsidian Vault",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2420,
+        500
+      ],
+      "parameters": {
+        "jsCode": "const fs = require('fs');\nconst path = require('path');\nconst d = $input.first().json;\n\nconst vault = process.env.OBSIDIAN_VAULT || '/home/pavan/SecurityKB';\nconst folder = path.join(vault, d.obsidian_folder || 'Misc');\nfs.mkdirSync(folder, { recursive: true });\n\nconst filepath = path.join(folder, `${d.obsidian_filename}.md`);\nfs.writeFileSync(filepath, d.obsidian_content, 'utf8');\n\nconsole.log(`[Obsidian] Written: ${filepath}`);\nreturn [{ json: { saved: true, path: filepath } }];"
+      }
+    }
+  ],
+  "connections": {
+    "Schedule \u2014 Every 2 Hours": {
+      "main": [
+        [
+          {
+            "node": "Define All RSS Sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Define All RSS Sources": {
+      "main": [
+        [
+          {
+            "node": "Fetch RSS Feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch RSS Feed": {
+      "main": [
+        [
+          {
+            "node": "Parse RSS \u2014 Extract Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse RSS \u2014 Extract Articles": {
+      "main": [
+        [
+          {
+            "node": "Dedup \u2014 Skip Already Saved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dedup \u2014 Skip Already Saved": {
+      "main": [
+        [
+          {
+            "node": "Fetch Full Article (Freedium bypass)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Full Article (Freedium bypass)": {
+      "main": [
+        [
+          {
+            "node": "Extract & Validate Article Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract & Validate Article Text": {
+      "main": [
+        [
+          {
+            "node": "Gemini \u2014 Score + Classify + VAPT Level",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini \u2014 Score + Classify + VAPT Level": {
+      "main": [
+        [
+          {
+            "node": "Parse Gemini \u2014 Filter Low Scores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Gemini \u2014 Filter Low Scores": {
+      "main": [
+        [
+          {
+            "node": "Groq \u2014 Write Full Pentest Notes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq \u2014 Write Full Pentest Notes": {
+      "main": [
+        [
+          {
+            "node": "Parse Groq + Build Final Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Groq + Build Final Output": {
+      "main": [
+        [
+          {
+            "node": "POST to Web Dashboard",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Write to Obsidian Vault",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true
+  }
+}

@@ -1,0 +1,425 @@
+{
+  "name": "Medium Security Knowledge Pipeline (Gemini + Groq + Notion)",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/bug-bounty"
+      },
+      "id": "node-rss-1",
+      "name": "RSS Bug Bounty",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/penetration-testing"
+      },
+      "id": "node-rss-2",
+      "name": "RSS Pentest",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 120]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/web-security"
+      },
+      "id": "node-rss-3",
+      "name": "RSS Web Security",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 240]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/api-security"
+      },
+      "id": "node-rss-4",
+      "name": "RSS API Security",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 360]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/red-team"
+      },
+      "id": "node-rss-5",
+      "name": "RSS Red Team",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 480]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/ssrf"
+      },
+      "id": "node-rss-6",
+      "name": "RSS SSRF",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 600]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/xss"
+      },
+      "id": "node-rss-7",
+      "name": "RSS XSS",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 720]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/sql-injection"
+      },
+      "id": "node-rss-8",
+      "name": "RSS SQLi",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 840]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/bugbountywriteup"
+      },
+      "id": "node-rss-9",
+      "name": "RSS BugBountyWriteup",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 960]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/system-weakness"
+      },
+      "id": "node-rss-10",
+      "name": "RSS System Weakness",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [0, 1080]
+    },
+    {
+      "parameters": {
+        "url": "=https://freedium.cfd/{{ $json.link }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          },
+          "redirect": {
+            "redirect": {
+              "followRedirects": true,
+              "maxRedirects": 5
+            }
+          },
+          "timeout": 30000
+        }
+      },
+      "id": "node-fetch-article",
+      "name": "Fetch Full Article",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [280, 540]
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "sourceData": "json",
+        "dataPropertyName": "data",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "article_text",
+              "cssSelector": "article, .article-content, .postArticle-content, section, main",
+              "returnValue": "text",
+              "returnArray": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-html-extract",
+      "name": "Extract Article Text",
+      "type": "n8n-nodes-base.htmlExtract",
+      "typeVersion": 1,
+      "position": [500, 540]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Merge RSS metadata with extracted article text\nconst rssData = $('Fetch Full Article').first().json;\nconst htmlData = $input.first().json;\n\nconst articleText = htmlData.article_text || '';\n\n// Skip if article text is too short (paywall / extraction failed)\nif (articleText.length < 300) {\n  console.log('Skipping: Article too short, likely paywalled or extraction failed');\n  return [];\n}\n\nreturn [{\n  json: {\n    link: rssData.link || '',\n    title: rssData.title || 'Unknown Title',\n    pubDate: rssData.pubDate || '',\n    article_text: articleText.substring(0, 12000) // Trim to 12k chars to stay within token limits\n  }\n}];"
+      },
+      "id": "node-prep-data",
+      "name": "Prepare & Validate Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 540]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={{ $env.GEMINI_API_KEY }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"You are a security article classifier. Analyze this article and return ONLY valid JSON (no markdown, no backticks, no extra text).\\n\\nIf the article is NOT about security/hacking/pentesting/vulnerabilities, return: {\\\"skip\\\": true}\\n\\nOtherwise return:\\n{\\n  \\\"title\\\": \\\"article title\\\",\\n  \\\"category\\\": \\\"one of: Bug Bounty | API Security | Web Exploitation | Red Teaming | Cloud Security | Authentication | Injection | SSRF | XSS | IDOR\\\",\\n  \\\"vulnerability_type\\\": \\\"one of: Auth Bypass | RCE | SSRF | SQLi | XSS | IDOR | CSRF | XXE | Deserialization | Logic Flaw | Misconfig\\\",\\n  \\\"severity\\\": \\\"one of: Critical | High | Medium | Low\\\",\\n  \\\"tools_mentioned\\\": [\\\"tool1\\\", \\\"tool2\\\"],\\n  \\\"quick_summary\\\": \\\"One paragraph technical summary\\\"\\n}\\n\\nArticle Title: {{ $json.title }}\\nArticle:\\n{{ $json.article_text }}\"\n        }\n      ]\n    }\n  ],\n  \"generationConfig\": {\n    \"temperature\": 0.0,\n    \"maxOutputTokens\": 2000\n  }\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "node-gemini",
+      "name": "Gemini - Classify Article",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [940, 540]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Gemini response and filter non-security articles\ntry {\n  const rawText = $input.first().json.candidates[0].content.parts[0].text;\n  const cleaned = rawText.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  const data = JSON.parse(cleaned);\n\n  if (data.skip) {\n    console.log('Skipping non-security article');\n    return [];\n  }\n\n  // Attach the original article text for Groq to use\n  const prepData = $('Prepare & Validate Data').first().json;\n  data.article_text = prepData.article_text;\n  data.source_link = prepData.link;\n  data.pub_date = prepData.pubDate;\n\n  return [{ json: data }];\n} catch(e) {\n  console.log('Gemini parse error:', e.message);\n  return [];\n}"
+      },
+      "id": "node-parse-gemini",
+      "name": "Parse Gemini + Filter",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1160, 540]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"temperature\": 0.2,\n  \"max_tokens\": 4000,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a senior Red Team pentester and technical writer. Create detailed, exploitation-focused pentest notes. Write like you are mentoring a junior pentester — be specific, use real commands, real payloads, real tool syntax. No fluff. Return ONLY valid JSON (no markdown backticks, no extra text).\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Article Classification:\\n- Title: {{ $json.title }}\\n- Category: {{ $json.category }}\\n- Vulnerability: {{ $json.vulnerability_type }}\\n- Severity: {{ $json.severity }}\\n- Tools: {{ JSON.stringify($json.tools_mentioned) }}\\n- Summary: {{ $json.quick_summary }}\\n\\nFull Article:\\n{{ $json.article_text }}\\n\\n---\\n\\nCreate detailed pentest notes as this exact JSON:\\n{\\n  \\\"root_cause_analysis\\\": \\\"Explain EXACTLY what the developer did wrong. What code mistake, misconfiguration, or design flaw caused this vulnerability. Be specific — mention actual functions, parameters, headers, or configs that were flawed.\\\",\\n  \\\"exploitation_walkthrough\\\": \\\"Step-by-step exploitation guide. Include: 1) How to discover this vuln (recon steps, what to look for), 2) How to confirm it (test cases, payloads), 3) How to exploit it (exact commands, tool syntax, curl requests, Burp steps), 4) How to escalate impact. Use actual tool commands.\\\",\\n  \\\"payloads_and_commands\\\": \\\"List every specific payload, command, curl request, or tool syntax that is applicable. Format as ready-to-use commands.\\\",\\n  \\\"impact_assessment\\\": \\\"What can an attacker achieve? Data exfiltration? Account takeover? RCE? Lateral movement? Be specific about business impact.\\\",\\n  \\\"chaining_opportunities\\\": \\\"How can this be chained with other vulns for maximum impact? Give at least 2-3 specific chaining paths.\\\",\\n  \\\"detection_tips\\\": \\\"How to find this during pentest/bug bounty? What are the indicators? What to grep for? What Burp extensions help? What nuclei templates?\\\",\\n  \\\"remediation\\\": \\\"How should the developer fix this? Specific code changes, config changes, library updates.\\\",\\n  \\\"key_takeaways\\\": \\\"3-5 bullet points a pentester should remember. Actionable and specific.\\\"\\\n}\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 90000
+        }
+      },
+      "id": "node-groq",
+      "name": "Groq - Craft Pentest Notes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1380, 540]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Groq response and merge with Gemini classification\ntry {\n  const groqRaw = $input.first().json.choices[0].message.content;\n  const groqCleaned = groqRaw.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  const groqData = JSON.parse(groqCleaned);\n\n  const geminiData = $('Parse Gemini + Filter').first().json;\n\n  const fullContent = [\n    `## 🔍 Root Cause Analysis\\n${groqData.root_cause_analysis}`,\n    `## 🎯 Exploitation Walkthrough\\n${groqData.exploitation_walkthrough}`,\n    `## 💣 Payloads & Commands\\n${groqData.payloads_and_commands}`,\n    `## 💥 Impact Assessment\\n${groqData.impact_assessment}`,\n    `## 🔗 Chaining Opportunities\\n${groqData.chaining_opportunities}`,\n    `## 🔎 Detection Tips\\n${groqData.detection_tips}`,\n    `## 🛡️ Remediation\\n${groqData.remediation}`,\n    `## ⚡ Key Takeaways\\n${groqData.key_takeaways}`\n  ].join('\\n\\n');\n\n  return [{\n    json: {\n      // Notion database properties\n      title: geminiData.title,\n      category: geminiData.category,\n      vulnerability_type: geminiData.vulnerability_type,\n      severity: geminiData.severity,\n      tools_used: Array.isArray(geminiData.tools_mentioned) ? geminiData.tools_mentioned : [],\n      source_url: geminiData.source_link,\n      root_cause: groqData.root_cause_analysis ? groqData.root_cause_analysis.substring(0, 2000) : '',\n      exploitation_method: groqData.exploitation_walkthrough ? groqData.exploitation_walkthrough.substring(0, 2000) : '',\n      impact: groqData.impact_assessment ? groqData.impact_assessment.substring(0, 1000) : '',\n      chaining_potential: groqData.chaining_opportunities ? groqData.chaining_opportunities.substring(0, 1000) : '',\n      key_takeaways: groqData.key_takeaways ? groqData.key_takeaways.substring(0, 1000) : '',\n      // Full body content for Notion page\n      full_content: fullContent\n    }\n  }];\n} catch(e) {\n  console.log('Groq parse error:', e.message);\n  return [];\n}"
+      },
+      "id": "node-parse-groq",
+      "name": "Parse Groq + Merge Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1600, 540]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.notion.com/v1/pages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.NOTION_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Notion-Version",
+              "value": "2022-06-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"parent\": { \"database_id\": \"{{ $env.NOTION_DATABASE_ID }}\" },\n  \"properties\": {\n    \"Title\": {\n      \"title\": [{ \"text\": { \"content\": \"{{ $json.title.replace(/\\\"/g, '') }}\" } }]\n    },\n    \"Category\": {\n      \"select\": { \"name\": \"{{ $json.category }}\" }\n    },\n    \"Vulnerability Type\": {\n      \"select\": { \"name\": \"{{ $json.vulnerability_type }}\" }\n    },\n    \"Severity\": {\n      \"select\": { \"name\": \"{{ $json.severity }}\" }\n    },\n    \"Root Cause\": {\n      \"rich_text\": [{ \"text\": { \"content\": \"{{ $json.root_cause.substring(0, 2000) }}\" } }]\n    },\n    \"Exploitation Method\": {\n      \"rich_text\": [{ \"text\": { \"content\": \"{{ $json.exploitation_method.substring(0, 2000) }}\" } }]\n    },\n    \"Tools Used\": {\n      \"multi_select\": {{ JSON.stringify($json.tools_used.slice(0,5).map(t => ({ name: t.substring(0,100) }))) }}\n    },\n    \"Source URL\": {\n      \"url\": \"{{ $json.source_url }}\"\n    },\n    \"Date Added\": {\n      \"date\": { \"start\": \"{{ new Date().toISOString().split('T')[0] }}\" }\n    },\n    \"Chaining Potential\": {\n      \"rich_text\": [{ \"text\": { \"content\": \"{{ $json.chaining_potential.substring(0, 2000) }}\" } }]\n    },\n    \"Status\": {\n      \"select\": { \"name\": \"New\" }\n    }\n  },\n  \"children\": [\n    {\n      \"object\": \"block\",\n      \"type\": \"paragraph\",\n      \"paragraph\": {\n        \"rich_text\": [{\n          \"type\": \"text\",\n          \"text\": { \"content\": \"{{ $json.full_content.substring(0, 2000) }}\" }\n        }]\n      }\n    },\n    {\n      \"object\": \"block\",\n      \"type\": \"paragraph\",\n      \"paragraph\": {\n        \"rich_text\": [{\n          \"type\": \"text\",\n          \"text\": { \"content\": \"{{ $json.full_content.length > 2000 ? $json.full_content.substring(2000, 4000) : '' }}\" }\n        }]\n      }\n    },\n    {\n      \"object\": \"block\",\n      \"type\": \"paragraph\",\n      \"paragraph\": {\n        \"rich_text\": [{\n          \"type\": \"text\",\n          \"text\": { \"content\": \"{{ $json.full_content.length > 4000 ? $json.full_content.substring(4000, 6000) : '' }}\" }\n        }]\n      }\n    }\n  ]\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "node-notion",
+      "name": "Notion - Create Knowledge Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1820, 540]
+    }
+  ],
+  "connections": {
+    "RSS Bug Bounty": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "RSS Pentest": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "RSS Web Security": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "RSS API Security": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "RSS Red Team": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "RSS SSRF": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "RSS XSS": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "RSS SQLi": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "RSS BugBountyWriteup": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "RSS System Weakness": {
+      "main": [[{ "node": "Fetch Full Article", "type": "main", "index": 0 }]]
+    },
+    "Fetch Full Article": {
+      "main": [[{ "node": "Extract Article Text", "type": "main", "index": 0 }]]
+    },
+    "Extract Article Text": {
+      "main": [[{ "node": "Prepare & Validate Data", "type": "main", "index": 0 }]]
+    },
+    "Prepare & Validate Data": {
+      "main": [[{ "node": "Gemini - Classify Article", "type": "main", "index": 0 }]]
+    },
+    "Gemini - Classify Article": {
+      "main": [[{ "node": "Parse Gemini + Filter", "type": "main", "index": 0 }]]
+    },
+    "Parse Gemini + Filter": {
+      "main": [[{ "node": "Groq - Craft Pentest Notes", "type": "main", "index": 0 }]]
+    },
+    "Groq - Craft Pentest Notes": {
+      "main": [[{ "node": "Parse Groq + Merge Data", "type": "main", "index": 0 }]]
+    },
+    "Parse Groq + Merge Data": {
+      "main": [[{ "node": "Notion - Create Knowledge Page", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "tags": ["security", "medium", "notion", "automation"]
+}

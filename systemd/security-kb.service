@@ -1,0 +1,26 @@
+[Unit]
+Description=Security KB — Web Dashboard (localhost:3000)
+After=network.target
+
+[Service]
+Type=simple
+User=pavan
+WorkingDirectory=/home/pavan/security-pipeline/webapp
+
+# Load API keys (GEMINI_API_KEY needed for lab generation)
+EnvironmentFile=-/home/pavan/security-pipeline/.env
+
+Environment=PORT=3000
+Environment=NODE_ENV=production
+
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+TimeoutStopSec=10
+KillMode=mixed
+
+StandardOutput=append:/home/pavan/security-pipeline/logs/dashboard.log
+StandardError=append:/home/pavan/security-pipeline/logs/dashboard-error.log
+
+[Install]
+WantedBy=multi-user.target

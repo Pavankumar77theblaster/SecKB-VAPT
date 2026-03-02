@@ -1,0 +1,19 @@
+[Unit]
+Description=Security KB Web Dashboard
+After=network.target
+
+[Service]
+Type=simple
+User=pavan
+WorkingDirectory=/home/pavan/security-pipeline/webapp
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5
+Environment=PORT=3000
+Environment=NODE_ENV=production
+
+StandardOutput=append:/home/pavan/security-pipeline/webapp/dashboard.log
+StandardError=append:/home/pavan/security-pipeline/webapp/dashboard.log
+
+[Install]
+WantedBy=multi-user.target

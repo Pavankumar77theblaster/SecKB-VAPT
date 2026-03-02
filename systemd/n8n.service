@@ -1,0 +1,28 @@
+[Unit]
+Description=n8n — Security Pipeline Automation Engine
+Documentation=https://docs.n8n.io
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pavan
+WorkingDirectory=/home/pavan/security-pipeline
+
+# Load all API keys from .env
+EnvironmentFile=/home/pavan/security-pipeline/.env
+
+ExecStart=/usr/local/bin/n8n start
+Restart=always
+RestartSec=10
+
+# Use up to 60% of available memory
+MemoryMax=60%
+# Nice value: 10 = slightly lower priority than interactive tasks
+Nice=10
+
+StandardOutput=append:/home/pavan/security-pipeline/logs/n8n.log
+StandardError=append:/home/pavan/security-pipeline/logs/n8n-error.log
+
+[Install]
+WantedBy=multi-user.target

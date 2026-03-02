@@ -1,0 +1,823 @@
+{
+  "name": "Security KB \u2014 Medium \u2192 Gemini Score \u2192 Groq Notes \u2192 Sheets + Obsidian",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/bug-bounty"
+      },
+      "id": "03a67064-33bc-416f-9370-2fec6c1af3a9",
+      "name": "RSS: Bug Bounty",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/penetration-testing"
+      },
+      "id": "9a2a3c74-bb7c-4c54-a73f-70d9a474fcdd",
+      "name": "RSS: Pentest",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/web-security"
+      },
+      "id": "991b01e6-b226-4be6-b53a-535089831cc0",
+      "name": "RSS: Web Security",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/api-security"
+      },
+      "id": "ba1d988f-d16a-4c27-8783-5872eb3911e4",
+      "name": "RSS: API Security",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/red-team"
+      },
+      "id": "27058b24-8aa5-43f4-9c35-55f9d84821d9",
+      "name": "RSS: Red Team",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/ssrf"
+      },
+      "id": "76749c71-d54d-44ab-82b4-880d8e7a08d2",
+      "name": "RSS: SSRF",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/xss"
+      },
+      "id": "1cdcc2e6-5184-4364-9fae-20c38ae48488",
+      "name": "RSS: XSS",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/sql-injection"
+      },
+      "id": "94c5e61b-159c-4674-8880-8b071dabfcce",
+      "name": "RSS: SQLi",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/ethical-hacking"
+      },
+      "id": "0f95d39f-e85c-484a-83ef-7ee0f50cef11",
+      "name": "RSS: Ethical Hacking",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/application-security"
+      },
+      "id": "4e5933c5-6c22-40ea-87db-70c2db3b6830",
+      "name": "RSS: AppSec",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/owasp"
+      },
+      "id": "6bf6b9f0-93e5-493d-a6c9-4e9d1ed3b71e",
+      "name": "RSS: OWASP",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/tag/web-exploitation"
+      },
+      "id": "8eb1b409-5a6e-4e57-94e8-27723a176eb1",
+      "name": "RSS: Web Exploitation",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1100
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/bugbountywriteup"
+      },
+      "id": "712c5ffe-86c2-471e-9fe9-9f710edefc7f",
+      "name": "RSS: BugBountyWriteup",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/system-weakness"
+      },
+      "id": "42d92ff6-dc40-44f4-b9be-62df410c1413",
+      "name": "RSS: System Weakness",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1300
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "unit": "hours",
+              "value": 6
+            }
+          ]
+        },
+        "url": "https://medium.com/feed/@infosecwriteups"
+      },
+      "id": "7ead2f9d-88b3-4fda-af69-4b078c3d9f3d",
+      "name": "RSS: InfosecWriteups",
+      "type": "n8n-nodes-base.rssFeedTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1400
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "passThrough",
+        "output": "single"
+      },
+      "id": "d4326c18-5a88-4566-beaa-7edb2f17dfa6",
+      "name": "Merge All Feeds",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        260,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://freedium.cfd/{{ $json.link }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          },
+          "redirect": {
+            "redirect": {
+              "followRedirects": true,
+              "maxRedirects": 3
+            }
+          },
+          "timeout": 25000
+        }
+      },
+      "id": "b6ff2167-6592-490b-95f3-300e0c419f5c",
+      "name": "Fetch Full Article",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract and clean article text from HTML\nconst html = $input.first().json.data || '';\nconst rssItem = $('Merge All Feeds').first().json;\n\n// Simple HTML text extractor\nconst text = html\n  .replace(/<script[\\s\\S]*?<\\/script>/gi, '')\n  .replace(/<style[\\s\\S]*?<\\/style>/gi, '')\n  .replace(/<[^>]+>/g, ' ')\n  .replace(/&amp;/g, '&')\n  .replace(/&lt;/g, '<')\n  .replace(/&gt;/g, '>')\n  .replace(/&quot;/g, '\"')\n  .replace(/&#39;/g, \"'\")\n  .replace(/&nbsp;/g, ' ')\n  .replace(/\\s{2,}/g, ' ')\n  .trim();\n\n// Skip if too short (paywalled or failed fetch)\nif (text.length < 400) {\n  console.log('SKIP: Too short, likely paywalled -', rssItem.title);\n  return [];\n}\n\nreturn [{\n  json: {\n    source_url: rssItem.link || '',\n    title: rssItem.title || 'Unknown',\n    pub_date: rssItem.pubDate || new Date().toISOString(),\n    article_text: text.substring(0, 14000)\n  }\n}];"
+      },
+      "id": "61c39ca9-cbad-4270-8f69-9b4be5454bc5",
+      "name": "Extract & Clean Text",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={{ $env.GEMINI_API_KEY }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are a senior pentester grading security articles for quality and usefulness.\\n\\nScore this article 1-10 based on:\\n- 9-10: Original research, real bug bounty report, novel technique, real CVE breakdown\\n- 7-8: Good technical walkthrough, working exploitation demo, practical CTF writeup\\n- 5-6: Decent intro content, some practical value\\n- 3-4: Generic tips, beginner theory, no real exploitation detail\\n- 1-2: Clickbait, marketing, non-technical, opinion piece\\n\\nAlso classify it. Return ONLY valid JSON, no markdown:\\n{\\n  \\\"score\\\": 8,\\n  \\\"category\\\": \\\"one of: Bug Bounty | API Security | Web Exploitation | Red Teaming | Cloud Security | Authentication | Injection | SSRF | XSS | IDOR | Misc\\\",\\n  \\\"vulnerability_type\\\": \\\"one of: Auth Bypass | RCE | SSRF | SQLi | XSS | IDOR | CSRF | XXE | Deserialization | Logic Flaw | Misconfig | Multiple\\\",\\n  \\\"severity\\\": \\\"one of: Critical | High | Medium | Low\\\",\\n  \\\"tools_mentioned\\\": [\\\"Burp Suite\\\", \\\"curl\\\"],\\n  \\\"one_line_summary\\\": \\\"What this article is about in one technical sentence\\\"\\n}\\n\\nIf this is NOT about security/hacking/pentesting at all, return: {\\\"score\\\": 0}\\n\\nArticle Title: {{ $json.title }}\\nArticle:\\n{{ $json.article_text }}\"\n    }]\n  }],\n  \"generationConfig\": { \"temperature\": 0.0, \"maxOutputTokens\": 500 }\n}",
+        "options": {
+          "timeout": 45000
+        }
+      },
+      "id": "fd5b8d40-ab58-4a03-a789-8418751099e0",
+      "name": "Gemini \u2014 Score Article",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "try {\n  const raw = $input.first().json.candidates[0].content.parts[0].text;\n  const cleaned = raw.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  const gemini = JSON.parse(cleaned);\n\n  // TRASH articles scoring below 6\n  if (!gemini.score || gemini.score < 6) {\n    console.log('TRASH (score ' + gemini.score + '):', $('Extract & Clean Text').first().json.title);\n    return [];\n  }\n\n  const articleData = $('Extract & Clean Text').first().json;\n\n  return [{\n    json: {\n      ...articleData,\n      quality_score: gemini.score,\n      category: gemini.category || 'Misc',\n      vulnerability_type: gemini.vulnerability_type || 'Logic Flaw',\n      severity: gemini.severity || 'Medium',\n      tools_mentioned: gemini.tools_mentioned || [],\n      one_line_summary: gemini.one_line_summary || ''\n    }\n  }];\n} catch(e) {\n  console.log('Gemini parse error:', e.message);\n  return [];\n}"
+      },
+      "id": "60fc6af8-251f-496a-ac26-931faece003b",
+      "name": "Filter \u2014 Score < 6 = Trash",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1140,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.GROQ_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"temperature\": 0.15,\n  \"max_tokens\": 4000,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a senior Red Team pentester and technical writer. Write detailed, exploitation-focused pentest notes. Be specific \u2014 use real commands, real payloads, real tool syntax. Mentor junior pentesters. Return ONLY valid JSON, no markdown backticks.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Article: {{ $json.title }}\\nCategory: {{ $json.category }} | Vuln: {{ $json.vulnerability_type }} | Severity: {{ $json.severity }}\\nSummary: {{ $json.one_line_summary }}\\n\\nFull Article:\\n{{ $json.article_text }}\\n\\n---\\nWrite pentest notes as this JSON:\\n{\\n  \\\"root_cause\\\": \\\"Exactly what the developer did wrong. Name the specific function, parameter, header, or config that was flawed. Be precise \u2014 a developer reading this should instantly know what to fix.\\\",\\n  \\\"exploitation_walkthrough\\\": \\\"Step-by-step exploitation. Include: 1) Discovery (recon, what to look for), 2) Confirmation (test payloads), 3) Exploitation (exact curl/Burp/tool commands), 4) Escalation. Use real commands not generic descriptions.\\\",\\n  \\\"payloads_and_commands\\\": \\\"Every specific payload, curl command, Burp step, or tool invocation that applies. Ready-to-use format.\\\",\\n  \\\"impact\\\": \\\"What attacker achieves: data theft, account takeover, RCE, lateral movement. Be specific.\\\",\\n  \\\"chaining_opportunities\\\": \\\"2-3 specific vuln chains for greater impact. Example: SSRF + IDOR = internal API enumeration + data theft.\\\",\\n  \\\"detection_and_hunting\\\": \\\"How to find this in a pentest: what to grep for, which Burp extensions, nuclei templates, common indicators.\\\",\\n  \\\"remediation\\\": \\\"Specific fix: code change, config update, library version. Not generic advice.\\\",\\n  \\\"key_takeaways\\\": \\\"5 bullet points a pentester must remember from this article. Actionable, specific.\\\"\\\n}\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 90000
+        }
+      },
+      "id": "375a2ce7-fc3c-4cfc-9e75-ddd277452a60",
+      "name": "Groq \u2014 Write Pentest Notes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\ntry {\n  const groqRaw = $input.first().json.choices[0].message.content;\n  const groqCleaned = groqRaw.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  const notes = JSON.parse(groqCleaned);\n\n  const d = $('Filter \u2014 Score < 6 = Trash').first().json;\n  const today = new Date().toISOString().split('T')[0];\n\n  // Build safe filename for Obsidian\n  const safeTitle = d.title\n    .replace(/[^a-zA-Z0-9\\s-]/g, '')\n    .replace(/\\s+/g, '-')\n    .toLowerCase()\n    .substring(0, 70);\n  const filename = `${today}-${safeTitle}`;\n\n  const toolTags = (d.tools_mentioned || []).map(t => t.replace(/\\s+/g, '-').toLowerCase()).join(' ');\n  const obsidianContent = `---\ntitle: \"${d.title.replace(/\"/g, \"'\")}\"\ncategory: ${d.category}\nvulnerability_type: ${d.vulnerability_type}\nseverity: ${d.severity}\nquality_score: ${d.quality_score}\nsource: ${d.source_url}\ndate_added: ${today}\nstatus: new\ntags: [security, ${d.category.toLowerCase().replace(/[\\s\\/]/g, '-')}, ${d.vulnerability_type.toLowerCase().replace(/\\s+/g, '-')}, ${toolTags}]\n---\n\n# ${d.title}\n\n> **Category:** ${d.category} | **Vuln:** ${d.vulnerability_type} | **Severity:** ${d.severity} | **Quality:** ${d.quality_score}/10\n> **Source:** [Original Article](${d.source_url})\n> **Summary:** ${d.one_line_summary}\n\n---\n\n## \ud83d\udd0d Root Cause\n\n${notes.root_cause}\n\n---\n\n## \ud83c\udfaf Exploitation Walkthrough\n\n${notes.exploitation_walkthrough}\n\n---\n\n## \ud83d\udca3 Payloads & Commands\n\n\\`\\`\\`\n${notes.payloads_and_commands}\n\\`\\`\\`\n\n---\n\n## \ud83d\udca5 Impact\n\n${notes.impact}\n\n---\n\n## \ud83d\udd17 Chaining Opportunities\n\n${notes.chaining_opportunities}\n\n---\n\n## \ud83d\udd0e Detection & Hunting\n\n${notes.detection_and_hunting}\n\n---\n\n## \ud83d\udee1\ufe0f Remediation\n\n${notes.remediation}\n\n---\n\n## \u26a1 Key Takeaways\n\n${notes.key_takeaways}\n`;\n\n  return [{\n    json: {\n      // Dashboard + Sheets fields\n      date_added: today,\n      title: d.title,\n      category: d.category,\n      vulnerability_type: d.vulnerability_type,\n      severity: d.severity,\n      quality_score: d.quality_score,\n      tools_used: d.tools_mentioned || [],\n      source_url: d.source_url,\n      one_line_summary: d.one_line_summary || '',\n      // Full Groq fields (for dashboard API)\n      root_cause: notes.root_cause || '',\n      exploitation_walkthrough: notes.exploitation_walkthrough || '',\n      payloads_and_commands: notes.payloads_and_commands || '',\n      impact: notes.impact || '',\n      chaining_opportunities: notes.chaining_opportunities || '',\n      detection_and_hunting: notes.detection_and_hunting || '',\n      remediation: notes.remediation || '',\n      key_takeaways: notes.key_takeaways || '',\n      status: 'new',\n      // Obsidian\n      obsidian_filename: filename,\n      obsidian_content: obsidianContent\n    }\n  }];\n} catch(e) {\n  console.log('Groq parse error:', e.message);\n  return [];\n}\n"
+      },
+      "id": "247d0603-8c2d-427c-abe1-a2b2bc26913e",
+      "name": "Merge & Build Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1580,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Write markdown file to Obsidian vault\nconst fs = require('fs');\nconst path = require('path');\n\nconst data = $input.first().json;\nconst vaultPath = process.env.OBSIDIAN_VAULT || '/home/pavan/SecurityKB';\n\n// Create subfolder by category\nconst categoryFolder = data.category.replace(/[^a-zA-Z0-9\\s]/g, '').replace(/\\s+/g, '-');\nconst folderPath = path.join(vaultPath, categoryFolder);\nfs.mkdirSync(folderPath, { recursive: true });\n\n// Write the markdown file\nconst filepath = path.join(folderPath, `${data.obsidian_filename}.md`);\nfs.writeFileSync(filepath, data.obsidian_content, 'utf8');\n\nconsole.log('Written to Obsidian:', filepath);\n\nreturn [{ json: { ...data, obsidian_file_path: filepath } }];"
+      },
+      "id": "58c3ec20-13b9-485a-b005-31e30560beed",
+      "name": "Write to Obsidian Vault",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://sheets.googleapis.com/v4/spreadsheets/{{ $env.GOOGLE_SHEETS_ID }}/values/Sheet1!A:N:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json._gsheets_token }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"values\": [[\n    \"{{ $json.date_added }}\",\n    \"{{ $json.title.replace(/\\\"/g, \"'\") }}\",\n    \"{{ $json.category }}\",\n    \"{{ $json.vulnerability_type }}\",\n    \"{{ $json.severity }}\",\n    \"{{ $json.quality_score }}\",\n    \"{{ $json.tools_used }}\",\n    \"{{ $json.source_url }}\",\n    \"{{ $json.root_cause_short.replace(/\\\"/g, \"'\").replace(/\\n/g, ' ') }}\",\n    \"{{ $json.key_takeaways_short.replace(/\\\"/g, \"'\").replace(/\\n/g, ' ') }}\",\n    \"{{ $json.status }}\",\n    \"{{ $json.obsidian_filename }}\",\n    \"{{ $json.chaining_short.replace(/\\\"/g, \"'\").replace(/\\n/g, ' ') }}\",\n    \"{{ $json.impact_short.replace(/\\\"/g, \"'\").replace(/\\n/g, ' ') }}\"\n  ]]\n}",
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "id": "ddc609f7-6fb9-4f53-bbd9-9d200d269a3b",
+      "name": "Google Sheets \u2014 Append Row",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1800,
+        840
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3000/api/articles",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "7f853652-a08e-449c-b8d4-5f89dedcb084",
+      "name": "Post to Web Dashboard",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1580,
+        700
+      ]
+    }
+  ],
+  "connections": {
+    "RSS: Bug Bounty": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS: Pentest": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "RSS: Web Security": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "RSS: API Security": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "RSS: Red Team": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "RSS: SSRF": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 5
+          }
+        ]
+      ]
+    },
+    "RSS: XSS": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 6
+          }
+        ]
+      ]
+    },
+    "RSS: SQLi": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 7
+          }
+        ]
+      ]
+    },
+    "RSS: Ethical Hacking": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 8
+          }
+        ]
+      ]
+    },
+    "RSS: AppSec": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 9
+          }
+        ]
+      ]
+    },
+    "RSS: OWASP": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 10
+          }
+        ]
+      ]
+    },
+    "RSS: Web Exploitation": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 11
+          }
+        ]
+      ]
+    },
+    "RSS: BugBountyWriteup": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 12
+          }
+        ]
+      ]
+    },
+    "RSS: System Weakness": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 13
+          }
+        ]
+      ]
+    },
+    "RSS: InfosecWriteups": {
+      "main": [
+        [
+          {
+            "node": "Merge All Feeds",
+            "type": "main",
+            "index": 14
+          }
+        ]
+      ]
+    },
+    "Merge All Feeds": {
+      "main": [
+        [
+          {
+            "node": "Fetch Full Article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Full Article": {
+      "main": [
+        [
+          {
+            "node": "Extract & Clean Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract & Clean Text": {
+      "main": [
+        [
+          {
+            "node": "Gemini \u2014 Score Article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini \u2014 Score Article": {
+      "main": [
+        [
+          {
+            "node": "Filter \u2014 Score < 6 = Trash",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter \u2014 Score < 6 = Trash": {
+      "main": [
+        [
+          {
+            "node": "Groq \u2014 Write Pentest Notes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq \u2014 Write Pentest Notes": {
+      "main": [
+        [
+          {
+            "node": "Merge & Build Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge & Build Output": {
+      "main": [
+        [
+          {
+            "node": "Post to Web Dashboard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Web Dashboard": {
+      "main": [
+        [
+          {
+            "node": "Write to Obsidian Vault",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true
+  },
+  "id": "17fb2f08-f8cc-4ddd-acd3-5f62a2c5d568",
+  "versionId": "02cba36e-0b85-40e0-9048-e85ad1dc61ec",
+  "meta": {
+    "instanceId": "6c033c9b-632b-4981-b68c-7589411c5080"
+  },
+  "active": false,
+  "pinData": {},
+  "staticData": null
+}
