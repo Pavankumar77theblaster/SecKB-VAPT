@@ -4,10 +4,25 @@
 
 const http  = require('http');
 const https = require('https');
+const fs    = require('fs');
+const path  = require('path');
 
-const TOKEN   = process.env.TELEGRAM_TOKEN || 'xxxx';
+// Load .env from same directory as this script
+try {
+  fs.readFileSync(path.join(__dirname, '.env'), 'utf8').split('\n').forEach(l => {
+    const m = l.match(/^([A-Z_]+)=(.+)$/);
+    if (m) process.env[m[1]] = m[2].trim();
+  });
+} catch(e) {}
+
+const TOKEN   = process.env.TELEGRAM_TOKEN || '';
 const API_URL = `https://api.telegram.org/bot${TOKEN}`;
 const KB_URL  = 'http://localhost:3000';
+
+if (!TOKEN) {
+  console.error('[bot] FATAL: TELEGRAM_TOKEN not set. Add it to .env file.');
+  process.exit(1);
+}
 
 let offset = 0;
 

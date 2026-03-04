@@ -11,6 +11,24 @@ try { require('fs').readFileSync(require('path').join(__dirname, '.env'), 'utf8'
 
 const GROQ_KEY     = process.env.GROQ_API_KEY     || 'xxxx';
 const DASHBOARD    = 'http://localhost:3000/api/articles';
+
+// ── Knowledge Base: read user's custom findings per vuln type ─────────────────
+let kbDb = null;
+try {
+  const DB = require('/home/pavan/security-pipeline/webapp/node_modules/better-sqlite3');
+  kbDb = new DB('/home/pavan/security-pipeline/webapp/db/security_kb.db', { readonly: true });
+} catch(e) { /* KB not available */ }
+
+function getKbContext(vulnType) {
+  if (!kbDb || !vulnType) return '';
+  try {
+    const kbRow   = kbDb.prepare('SELECT content FROM knowledge_base WHERE vuln_type = ?').get(vulnType);
+    const pattRow = kbDb.prepare('SELECT content FROM patt_cache WHERE vuln_type = ?').get(vulnType);
+    const kbCtx   = kbRow   ? `YOUR PREVIOUS FINDINGS FOR ${vulnType}:\n${kbRow.content}\n\nUse these insights to enhance and validate your analysis.\n\n` : '';
+    const pattCtx = pattRow ? `=== PayloadsAllTheThings Reference (${vulnType}) ===\n${pattRow.content.slice(0,2500)}\n===\n\n` : '';
+    return kbCtx + pattCtx;
+  } catch(e) { return ''; }
+}
 const MAX_ARTICLES = parseInt(process.argv[process.argv.indexOf('--limit') + 1] || '30');
 const DAYS_BACK    = parseInt(process.argv[process.argv.indexOf('--days')  + 1] || '7');
 const CUTOFF       = Date.now() - DAYS_BACK * 24 * 60 * 60 * 1000;
@@ -41,6 +59,30 @@ const FEEDS = [
   { url: 'https://medium.com/feed/tag/race-condition',               level: 'Advanced',   label: 'Race Condition' },
   { url: 'https://medium.com/feed/tag/api-security',                 level: 'High',       label: 'API Security' },
   { url: 'https://medium.com/feed/tag/cors',                         level: 'Low',        label: 'CORS Misconfig' },
+
+  // ── Followed authors & publications ─────────────────────────────────────────
+  { url: 'https://medium.com/feed/@xalgord',                         level: 'High',       label: 'Krishna Kumar' },
+  { url: 'https://medium.com/feed/@jatin.b.rx3',                    level: 'High',       label: 'Jatin Banga' },
+  { url: 'https://medium.com/feed/@P4RAD0X',                        level: 'High',       label: 'PARADOX' },
+  { url: 'https://medium.com/feed/@iamgk808',                       level: 'High',       label: 'iamgk808' },
+  { url: 'https://medium.com/feed/@lostsec',                        level: 'High',       label: 'Lostsec' },
+  { url: 'https://medium.com/feed/@bugbounty_learners',             level: 'Medium',     label: 'bugbounty_learners' },
+  { url: 'https://medium.com/feed/@bugbountycenter',                level: 'High',       label: 'BugBounty.Center' },
+  { url: 'https://medium.com/feed/@bugbsurveys',                    level: 'Medium',     label: 'Bugbounty Surveys' },
+  { url: 'https://medium.com/feed/@leetsec',                        level: 'High',       label: 'LeetSec' },
+  { url: 'https://medium.com/feed/bug-bounty-hunting-a-comprehensive-guide-in', level: 'Medium', label: 'BB Guide EN+FR' },
+  { url: 'https://medium.com/feed/xmxa-bug',                        level: 'High',       label: 'XMXA-AI-BUG' },
+  { url: 'https://medium.com/feed/bug-bounty-hunting',              level: 'High',       label: 'Bug Bounty Hunting' },
+  { url: 'https://medium.com/feed/pinoywhitehat',                   level: 'High',       label: 'Pinoy White Hat' },
+  { url: 'https://medium.com/feed/infosec-notes',                   level: 'High',       label: 'Mr.Horbio Notes' },
+  { url: 'https://medium.com/feed/bug-bounty',                      level: 'High',       label: 'Bug Bounty Pub' },
+  { url: 'https://medium.com/feed/bug-bounty-writeups',             level: 'High',       label: 'BB Writeups' },
+  { url: 'https://medium.com/feed/bugbountytips',                   level: 'High',       label: 'BugBountyTips' },
+  { url: 'https://medium.com/feed/bountynuggets',                   level: 'High',       label: 'Bug Bounty Nuggets' },
+  { url: 'https://medium.com/feed/intigriti',                       level: 'Advanced',   label: 'intigriti' },
+  { url: 'https://medium.com/feed/hackenproof',                     level: 'Advanced',   label: 'HackenProof' },
+  { url: 'https://medium.com/feed/hackenproof-bug-bounty',          level: 'High',       label: 'HackenProof BB' },
+  { url: 'https://medium.com/feed/bug-bounty-infosec',              level: 'High',       label: 'Bug Bounty & InfoSec' },
 ];
 
 // ── HTTP fetch ───────────────────────────────────────────────────────────────
@@ -101,11 +143,27 @@ function parseRSS(xml, feed) {
     const rawDesc = descM?.[1] || '';
     const desc = rawDesc.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 1200);
 
+    // Extract images from RSS HTML content
+    const images = [];
+    const ogImg = rawDesc.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)
+                  || rawDesc.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+    if (ogImg?.[1]) images.push(ogImg[1]);
+    const imgRe = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+    let imgM;
+    while ((imgM = imgRe.exec(rawDesc)) !== null && images.length < 6) {
+      const src = imgM[1];
+      if (src.startsWith('http') && !images.includes(src) &&
+          !/(pixel|tracker|badge|avatar|icon|logo|emoji|1x1|spacer|ads|count)/i.test(src) &&
+          !src.endsWith('.svg') && src.includes('.')) {
+        images.push(src);
+      }
+    }
+
     if (!link || !link.startsWith('http')) continue;
     if (pubTime < CUTOFF) continue;
     if (!title || title === 'Untitled' || title.length < 10) continue;
 
-    items.push({ title, link, pub_date: dateStr || new Date().toISOString(), level: feed.level, label: feed.label, desc });
+    items.push({ title, link, pub_date: dateStr || new Date().toISOString(), level: feed.level, label: feed.label, desc, images });
   }
   return items;
 }
@@ -187,39 +245,37 @@ Article Snippet: ${desc.slice(0, 500)}`;
 
 // ── Generate pentest notes with Groq ────────────────────────────────────────
 async function generateNotes(article, score) {
-  const prompt = `Article: ${article.title}
-VAPT Level: ${score.vapt_level} | Category: ${score.category} | Vuln: ${score.vulnerability_type} | Severity: ${score.severity}
-Summary: ${score.one_line_summary}
+  const prompt = `Vulnerability: ${score.vulnerability_type} | VAPT Level: ${score.vapt_level} | Severity: ${score.severity}
+Article: ${article.title}
+Context: ${article.desc.slice(0, 800)}
 
-Context from article:
-${article.desc}
-
-Create comprehensive educational pentest notes as this exact JSON (all fields required, no markdown):
+Write attack-ready pentest notes. No theory. No analogies. Write as if briefing a pentester going into a live target right now. Return ONLY this JSON (no markdown):
 {
-  "what_is_it": "ELI5 explanation for a complete beginner. What is this vulnerability? Why does it exist? Use a real-world analogy. 3-5 sentences.",
-  "mental_model": "ONE powerful analogy that makes this vulnerability click. Format: '[Vuln] is like [real-world scenario] — developer [mistake], attacker [action], result is [impact]'.",
-  "memory_hook": "A single punchy sentence or mnemonic to remember this technique. Make it memorable.",
-  "where_to_look": "Exactly WHERE in a web app this hides: HTTP methods, content-types, app flows (login/export/webhook), URL patterns, parameters.",
-  "behavioral_indicators": "HOW TO DETECT from server behavior: response time differences, error patterns, status codes, out-of-band methods.",
-  "how_to_find_it": "Step-by-step discovery methodology with tool commands.",
-  "root_cause": "The developer mistake that causes this vulnerability.",
-  "exploitation_walkthrough": "Step-by-step exploitation with specific commands and payloads.",
-  "payloads_and_commands": "Working payloads, tool commands, one-liners. Be specific.",
-  "payload_mutations": "WAF bypass techniques and payload variations when basic fails.",
-  "impact": "What an attacker can achieve: data stolen, account takeover, RCE, etc.",
-  "chaining_opportunities": "How this combines with other vulnerabilities for higher impact.",
-  "detection_and_hunting": "How defenders detect this in logs, WAF rules, SIEM queries.",
-  "remediation": "Exact code fixes and security controls to prevent this.",
-  "key_takeaways": "3-5 bullet points: the most important things to remember.",
-  "difficulty_tips": "Tips specific to ${score.vapt_level} level: what to focus on, common mistakes.",
-  "real_world_scenario": "A realistic pentesting scenario showing how this is found in the wild.",
-  "custom_header_guide": "Which HTTP headers to test and how for this vulnerability type.",
-  "beginner_context": "${score.beginner_context || ''}"
+  "what_is_it": "Technical definition: what trust boundary is violated, what the attacker primitive is (read/write/execute/redirect/exfil), which CWE applies. Name the OWASP Top 10 category. 3 sentences, pure technical.",
+  "mental_model": "Attack trigger: the exact condition that makes this fire — input point, missing control, and resulting attacker action. One sentence like: 'When [app does X without validating Y], send [payload Z] to [endpoint] and gain [primitive]'.",
+  "memory_hook": "The one-liner rule a pentester keeps in their head during recon. E.g. 'If user-supplied data reaches [sink] without [control] — test it.'",
+  "where_to_look": "Attack surface enumeration: list every injection point — URL path segments, query params (name common ones: id, url, redirect, file, cmd, template), HTTP headers (Host, Origin, Referer, X-Forwarded-For, X-Forwarded-Host, Content-Type, Authorization), request body fields (JSON keys, XML nodes, multipart parts), GraphQL arguments, WebSocket messages, file upload fields. Include which HTTP methods expose it (GET/POST/PUT/PATCH).",
+  "behavioral_indicators": "Differential signals during probing (no guessing — server behavior): 1) time-based: response delay >2s on sleep/waitfor payload 2) error-based: stack traces, DB errors, path disclosure in response 3) size-based: response body length change >20% 4) status-based: 500 on injection, 302 on auth bypass 5) OOB: DNS callback to Burp Collaborator or interactsh. Format each as 'If [probe] → observe [signal]'.",
+  "how_to_find_it": "Numbered recon steps with copyable commands. Step 1: passive recon command. Step 2: active fuzzing command (ffuf/nuclei/sqlmap with flags). Step 3: manual Burp verification. Step 4: confirm vuln. Include exact flags, wordlist paths (/usr/share/seclists/...), and what to look for in output.",
+  "root_cause": "CWE-[number]: [name]. Missing control: [exactly what was not implemented]. Vulnerable code pattern: show pseudocode or language-specific snippet of the mistake (e.g. string concatenation in SQL, innerHTML without sanitization, SSRF via unchecked URL parameter).",
+  "exploitation_walkthrough": "BURP SUITE MANUAL TESTING WORKFLOW:\\nSetup: Proxy → Intercept ON → browse target in Burp browser → HTTP History → Send relevant request to Repeater.\\nStep 1 BASELINE: Send unmodified request in Repeater. Note status code, body length, key headers. This is your comparison point.\\nStep 2 PROBE: Modify [parameter/header] → insert probe payload → Send → look for [error/reflection/redirect/timing change] in Response tab. Explain WHY this probe reveals the vulnerability.\\nStep 3 CONFIRM: Replace probe with exploit payload → Send → confirm [exact success indicator: string in body / status code / header value]. Explain what the response proves.\\nStep 4 ESCALATE: [how to escalate from proof to maximum impact — data exfil, ATO, pivoting]. Burp Intruder for mass testing: Positions → mark §payload§ → Payloads: Simple list → /usr/share/seclists/[path] → Start Attack → sort by Length.\\n\\nTEST CASE 1 — [Basic exploitation name]:\\nTarget endpoint + parameter + HTTP method. Burp Repeater tab: show the raw HTTP request with payload in place. Success indicator: [exact response difference]. What this proves: [impact]. Report evidence: [what to screenshot].\\nTEST CASE 2 — [Authenticated or higher-impact variant]: [Same structure].\\nTEST CASE 3 — [Filter bypass or WAF evasion]: [Same structure with bypass technique explained].",
+  "payloads_and_commands": "Ready-to-fire payloads only — no prose. Group by type: [BASIC]: the minimal working payload. [ENCODED]: URL/HTML/Unicode encoded variant. [BLIND]: OOB callback payload (Burp Collaborator URL). [POLYGLOT]: works across multiple contexts. [TOOL]: sqlmap/ffuf/nuclei/xsstrike command with flags. Each on its own line.",
+  "payload_mutations": "WAF bypass table — 5+ techniques: [technique name]: [modified payload] — [why it bypasses]. Cover: URL double-encoding, case variation, comment injection (/**/, %0a), whitespace substitution, chunked encoding, parameter pollution (param=a&param=b), null byte injection, unicode normalization.",
+  "impact": "Concrete attacker outcomes: 1) what data is accessible (table names, file paths, env vars) 2) what actions are possible (account takeover, file write, RCE, SSRF pivot) 3) lateral movement path 4) estimated CVSS v3 score [n.n] with vector string AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H. Business impact: data breach notification cost, compliance violation (GDPR/PCI/HIPAA).",
+  "chaining_opportunities": "Attack chains with logical steps: [Vuln A] → [how it enables] → [Vuln B] → [final impact]. E.g. 'IDOR on /api/users/{id} leaks admin email → use in password reset → account takeover → SSRF via admin panel → internal network scan'. List 2-3 chains.",
+  "detection_and_hunting": "SOC/Blue Team detection. Splunk query: [query]. Elastic query: [query]. Log field patterns: [field] contains [value]. Network IOC: [pattern]. WAF rule snippet: [rule]. Anomaly: [what looks different from baseline traffic].",
+  "remediation": "Code-level fix — show vulnerable snippet vs fixed snippet side by side. Specific framework API (e.g. PreparedStatement, DOMPurify.sanitize(), parameterize()). Security headers with exact values (CSP, X-Frame-Options, etc.). Input validation rule. Library/version upgrade if applicable.",
+  "key_takeaways": "5 numbered tactical notes from attacker POV: 1) what you must always check 2) what automated scanners miss that manual testing finds 3) most common false positive to eliminate 4) the one header/parameter that most frequently reveals this 5) the fastest way to confirm exploitability in a time-boxed engagement.",
+  "difficulty_tips": "For ${score.vapt_level} level practitioners — what trips people up at this stage: common dead-ends, when to move on vs dig deeper, what a scanner won't catch, the manual check that confirms it. Be specific about tools and approaches for this level.",
+  "real_world_scenario": "Bug bounty / pentest engagement story (200+ words): target type (SaaS/fintech/e-commerce/healthcare), initial recon phase with tool output snippet, exact parameter/endpoint where vuln found, full exploitation chain with commands, what was exfiltrated/demonstrated, how it was reported, severity awarded. Write in first person past tense as if debriefing.",
+  "custom_header_guide": "Header injection table — each row: [Header Name] | [Value to inject] | [Indicator of success]. Cover: Host header (SSRF, password reset poisoning), X-Forwarded-For (IP restriction bypass), Origin (CORS misconfiguration), Referer (info leak, CSRF), Content-Type (XXE switch, JSON→form), X-HTTP-Method-Override (method restriction bypass), Authorization (JWT none alg, Bearer null). Include the curl -H flag for each.",
+  "beginner_context": "The minimum a junior pentester must understand before attempting this: what background knowledge is required, what to read first, and the single most important concept to grasp."
 }`;
 
+  const kbContext = getKbContext(score.vulnerability_type);
   const raw = await groqRequest([
-    { role: 'system', content: 'You are a senior Red Team pentester and security educator. Return ONLY valid JSON, no markdown backticks.' },
-    { role: 'user', content: prompt }
+    { role: 'system', content: 'You are a senior Red Team professional (OSCP, BSCP, CPENT, eWPTX) writing structured pentest playbooks. RULES: (1) Manual testing = Burp Suite workflow (Proxy→Intercept→Repeater→Intruder). Never use curl for manual steps — curl is only for automation. (2) For every Burp step: which tool, what to modify, what to look for in Response tab, what it proves. (3) Every step must explain WHY — a step without the reason is useless. (4) Real tool flags, real seclists paths. Return ONLY valid JSON. Start with { end with }. No markdown fences.' },
+    { role: 'user', content: kbContext + prompt }
   ], 4000);
   const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
   return JSON.parse(cleaned);
@@ -323,6 +379,7 @@ async function main() {
         custom_header_guide:      notes.custom_header_guide || '',
         real_world_scenario:      notes.real_world_scenario || '',
         memory_hook:              notes.memory_hook || '',
+        image_urls:               article.images || [],
         status:                   'new'
       };
 

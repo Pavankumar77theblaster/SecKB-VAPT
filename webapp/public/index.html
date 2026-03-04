@@ -242,6 +242,11 @@ header{
 [data-theme="light"] .b-practiced{background:#fffbeb;color:#92400e;border-color:#fde68a}
 [data-theme="light"] .b-mastered{background:#faf5ff;color:#6b21a8;border-color:#e9d5ff}
 
+/* Light mode score badges */
+[data-theme="light"] .s9,[data-theme="light"] .s10{color:#15803d;background:#f0fdf4;border-color:#bbf7d0}
+[data-theme="light"] .s7,[data-theme="light"] .s8{color:#1d4ed8;background:#eff6ff;border-color:#bfdbfe}
+[data-theme="light"] .s5,[data-theme="light"] .s6{color:#92400e;background:#fffbeb;border-color:#fde68a}
+
 .card-date{color:var(--muted);font-size:11px;margin-left:auto}
 .newdot{width:6px;height:6px;border-radius:50%;background:var(--accent);position:absolute;top:12px;right:12px}
 .notedot{position:absolute;top:10px;right:24px;font-size:10px;color:var(--muted);opacity:.6}
@@ -298,11 +303,53 @@ header{
 .det-body{padding:18px 22px}
 .dsec{margin-bottom:22px}
 .dsec h3{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border);font-weight:600}
-.dtext{color:var(--text);line-height:1.85;white-space:pre-wrap;font-size:13.5px}
+.dtext{color:var(--text);line-height:1.7;font-size:13px}
 
 .mental-box{background:var(--bg3);border:1px solid var(--border);border-left:2px solid #86efac;border-radius:var(--r-md);padding:13px 15px;margin-bottom:14px}
 .mental-box .label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#86efac;margin-bottom:5px;font-weight:600}
-.mental-box .text{color:var(--text);line-height:1.8;font-size:13.5px;font-style:italic}
+.mental-box .text{color:var(--text);line-height:1.7;font-size:13px}
+
+/* ── Smart Content Formatter ─────────────────────────────────────────────── */
+.fmt-gap{height:5px}
+.fmt-codeblock{background:var(--code-bg);border:1px solid var(--border);border-radius:6px;padding:10px 14px 10px 14px;margin:5px 0;position:relative;overflow-x:auto}
+.fmt-codeblock pre{margin:0;font-size:11.5px;color:var(--code-text);font-family:var(--mono);line-height:1.65;white-space:pre-wrap;word-break:break-all}
+.fmt-codeblock .copybtn{position:absolute;top:7px;right:7px}
+.fmt-cmd{background:var(--code-bg);border-left:2px solid var(--cyan);color:var(--code-text);font-family:var(--mono);font-size:11.5px;padding:3px 10px 3px 10px;border-radius:0 4px 4px 0;margin:2px 0;white-space:pre-wrap;word-break:break-all;display:block;cursor:pointer;transition:background .12s}
+.fmt-cmd:hover{background:rgba(6,182,212,.08);border-left-color:var(--accent)}
+.fmt-step{display:flex;align-items:baseline;gap:9px;margin:7px 0;line-height:1.7}
+.fmt-stepnum{background:var(--accent);color:#fff;border-radius:4px;font-size:10px;font-weight:700;padding:2px 7px;flex-shrink:0;min-width:18px;text-align:center;letter-spacing:.03em}
+.fmt-step-txt{flex:1;color:var(--text);font-size:13px}
+.fmt-kv{display:flex;align-items:baseline;gap:5px;margin:3px 0;line-height:1.65;flex-wrap:wrap}
+.fmt-kv.is-label{background:var(--bg3);border-radius:5px;padding:4px 10px;margin:4px 0;border-left:2px solid var(--accent-border)}
+.fmt-kv-k{color:var(--accent);font-weight:700;font-size:11.5px;flex-shrink:0;font-family:var(--mono)}
+.fmt-kv-c{color:var(--muted);flex-shrink:0}
+.fmt-kv-v{color:var(--text);flex:1;font-size:13px}
+.fmt-row{display:flex;gap:0;margin:3px 0;border-radius:5px;overflow:hidden;border:1px solid var(--border)}
+.fmt-col{padding:5px 10px;font-size:12.5px;line-height:1.5}
+.fmt-col.c0{background:var(--accent-dim);color:var(--bright);font-weight:700;font-size:11.5px;border-right:1px solid var(--border);min-width:120px;font-family:var(--mono)}
+.fmt-col.c1{flex:1;color:var(--text)}
+.fmt-col.c2{color:var(--dim);font-size:12px;border-left:1px solid var(--border)}
+.fmt-bullet{display:flex;gap:8px;align-items:baseline;margin:3px 0;line-height:1.7}
+.fmt-dot{color:var(--accent);font-size:10px;flex-shrink:0;font-weight:900;margin-top:2px}
+.fmt-arrow-row{color:var(--text);line-height:1.7;margin:3px 0;padding:4px 9px;background:var(--bg3);border-radius:4px;font-size:13px;border-left:2px solid var(--accent-border)}
+.fmt-section-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:14px 0 5px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.fmt-p{margin:2px 0;line-height:1.8;color:var(--text);font-size:13px}
+/* inline highlights */
+.h-method{color:var(--green);font-weight:700;font-size:11px;background:rgba(74,222,128,.12);padding:1px 5px;border-radius:3px;font-family:var(--mono)}
+.h-tool{color:var(--cyan);font-weight:600}
+.h-cve{color:var(--yellow);font-weight:700;font-size:11.5px;background:rgba(251,191,36,.1);padding:0 4px;border-radius:3px}
+.h-status{color:var(--orange);font-weight:700;font-family:var(--mono);font-size:11.5px}
+.h-arrow{color:var(--accent);font-weight:900}
+.h-code{background:var(--code-bg);color:var(--code-text);font-family:var(--mono);font-size:11.5px;padding:1px 5px;border-radius:3px}
+/* light overrides */
+[data-theme="light"] .fmt-cmd{background:#f0f9ff;border-left-color:#0891b2;color:#0c4a6e}
+[data-theme="light"] .fmt-kv.is-label{background:#f8fafc}
+[data-theme="light"] .fmt-row{border-color:#cbd5e1}
+[data-theme="light"] .fmt-col.c0{background:rgba(99,102,241,.08);color:#3730a3}
+[data-theme="light"] .fmt-arrow-row{background:#f8fafc}
+[data-theme="light"] .h-method{background:rgba(22,163,74,.1);color:#15803d}
+[data-theme="light"] .h-cve{background:rgba(202,138,4,.08);color:#92400e}
+[data-theme="light"] .h-code{background:#f1f5f9;color:#1e40af}
 [data-theme="light"] .mental-box{border-left-color:var(--green)}
 [data-theme="light"] .mental-box .label{color:var(--green)}
 [data-theme="light"] .wild-section .label{color:#dc2626}
@@ -310,6 +357,52 @@ header{
 [data-theme="light"] .save-indicator.saved{color:var(--green)}
 [data-theme="light"] .lab-step.done .lab-step-check{background:var(--green);border-color:var(--green)}
 [data-theme="light"] .lab-step.done .lab-step-num{color:var(--green)}
+
+.article-images{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:flex-start}
+.article-img-featured{width:100%;max-height:280px;object-fit:cover;border-radius:var(--r-md);border:1px solid var(--border);display:block}
+.article-img-thumb{height:70px;width:auto;max-width:140px;object-fit:cover;border-radius:var(--r-sm);border:1px solid var(--border);cursor:pointer;transition:opacity .2s}
+.article-img-thumb:hover{opacity:.8}
+
+/* Quick Reference Strip */
+.qref-strip{display:flex;gap:8px;padding:10px 18px;background:var(--bg2);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.qref-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 12px;flex:0 0 auto;min-width:72px}
+.qref-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:2px;font-weight:700}
+.qref-val{font-size:12.5px;font-weight:700;color:var(--bright);font-family:var(--mono)}
+.qref-cwe .qref-val{color:var(--yellow)}
+.qref-cvss .qref-val{color:#f87171}
+.qref-tools .qref-val{color:var(--cyan);font-size:11px}
+.qref-owasp .qref-val{color:#c084fc;font-size:11px;font-family:var(--sans);font-weight:600}
+[data-theme="light"] .qref-card{background:#f8fafc}
+
+/* Attack Flow */
+.attack-flow{display:flex;align-items:center;padding:9px 18px;background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;gap:0}
+.flow-step{padding:4px 13px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;background:var(--bg3);border:1px solid var(--border);color:var(--muted);white-space:nowrap;flex-shrink:0}
+.flow-step.fs-active{background:rgba(20,184,166,.12);border-color:var(--accent);color:var(--accent)}
+.flow-step.fs-done{background:rgba(20,184,166,.05);border-color:rgba(20,184,166,.3);color:rgba(20,184,166,.6)}
+.flow-arr{color:var(--muted);font-size:14px;padding:0 5px;flex-shrink:0}
+[data-theme="light"] .flow-step{background:#f1f5f9}
+[data-theme="light"] .flow-step.fs-active{background:rgba(13,148,136,.1)}
+[data-theme="light"] .flow-step.fs-done{background:rgba(13,148,136,.06)}
+
+/* Analyze Request tab */
+.analyze-area{width:100%;min-height:180px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);color:var(--text);font-family:var(--mono);font-size:12px;padding:12px;resize:vertical;outline:none;line-height:1.6;transition:border-color .12s}
+.analyze-area:focus{border-color:var(--accent)}
+.analyze-area::placeholder{color:var(--muted);font-family:var(--sans)}
+.analyze-btn{margin-top:9px;padding:8px 20px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.analyze-btn:hover{opacity:.85}
+.analyze-btn:disabled{opacity:.4;cursor:default}
+.analyze-result{margin-top:16px}
+.analyze-vuln-card{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--r-md);padding:12px 14px;margin-bottom:10px}
+.analyze-vuln-name{font-size:13px;font-weight:700;color:var(--bright);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.analyze-conf{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;border:1px solid currentColor}
+.conf-High{color:#f87171;background:rgba(248,113,113,.1)}
+.conf-Medium{color:var(--yellow);background:rgba(234,179,8,.08)}
+.conf-Low{color:var(--muted);background:var(--bg3)}
+.analyze-row{font-size:12.5px;color:var(--text);line-height:1.7;margin-top:4px}
+.analyze-row b{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.6px;margin-right:4px}
+.analyze-burp{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:8px 12px;margin-top:8px;font-size:11.5px;font-family:var(--mono);line-height:1.7;color:var(--dim);white-space:pre-wrap}
+[data-theme="light"] .analyze-vuln-card{background:#f8fafc}
+[data-theme="light"] .analyze-burp{background:#f1f5f9}
 
 .hook-box{background:var(--bg3);border:1px solid var(--border);border-left:2px solid var(--accent);border-radius:var(--r-md);padding:11px 15px;margin-bottom:14px}
 .hook-box .text{color:var(--bright);line-height:1.7;font-size:13.5px;font-weight:500}
@@ -340,6 +433,9 @@ header{
 .tips-box{background:var(--bg3);border:1px solid var(--border);border-left:2px solid #d8b4fe;border-radius:var(--r-md);padding:13px 15px;margin-top:5px}
 .tips-box .text{color:var(--text);line-height:1.8;font-size:13.5px;white-space:pre-wrap}
 [data-theme="light"] .tips-box{border-left-color:var(--purple)}
+.interview-box{background:rgba(251,191,36,.04);border:1px solid rgba(251,191,36,.2);border-left:3px solid #fbbf24;border-radius:var(--r-md);padding:15px 16px;margin-top:5px}
+.interview-box .text{color:var(--text);line-height:1.85;font-size:13.5px;white-space:pre-wrap}
+[data-theme="light"] .interview-box{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.25);border-left-color:#d97706}
 
 .wild-section{background:var(--bg3);border:1px solid var(--border);border-left:2px solid #fca5a5;border-radius:var(--r-md);padding:13px 15px;margin-bottom:10px}
 .wild-section .label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#fca5a5;margin-bottom:7px;font-weight:600}
@@ -595,6 +691,186 @@ header{
 #chat-send{width:34px;height:34px;border-radius:var(--r-md);background:var(--accent);border:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .12s}
 #chat-send:hover{opacity:.85}
 #chat-send:disabled{opacity:.4;cursor:not-allowed}
+
+/* ── Skeleton loaders ── */
+.card.skeleton{pointer-events:none;overflow:hidden}
+.skel-line{border-radius:3px;display:block}
+.skel-title{height:13px;width:75%;margin-bottom:10px}
+.skel-meta{display:flex;gap:5px;margin-top:4px}
+.skel-badge{height:18px;width:52px;border-radius:3px}
+@keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+.skeleton .skel-line{background:linear-gradient(90deg,var(--bg3) 25%,var(--bg4) 50%,var(--bg3) 75%);background-size:400px 100%;animation:shimmer 1.2s infinite}
+
+/* ── Scroll progress bar ── */
+#scroll-progress-bar{position:sticky;top:0;height:2px;width:0%;background:var(--accent);z-index:10;transition:width .08s;display:block;flex-shrink:0}
+
+/* ── Streak box ── */
+.streak-box{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);margin:8px 2px 4px}
+.streak-flame{font-size:16px;line-height:1}
+#streak-count{font-size:18px;font-weight:700;color:var(--bright);line-height:1;font-family:var(--mono)}
+.streak-label{font-size:11px;color:var(--muted)}
+
+/* ── Vuln coverage bars ── */
+.sidebar-section{padding:4px 2px 8px}
+.sidebar-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);padding:4px 8px;margin-bottom:4px;font-weight:600}
+.vuln-bar-row{display:flex;align-items:center;gap:5px;margin-bottom:4px;padding:0 4px}
+.vuln-bar-name{font-size:10.5px;color:var(--dim);width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0}
+.vuln-bar-track{flex:1;height:4px;background:var(--bg4);border-radius:99px;overflow:hidden}
+.vuln-bar-fill{height:100%;background:var(--accent);border-radius:99px;transition:width .5s ease}
+.vuln-bar-count{font-size:10px;color:var(--muted);min-width:18px;text-align:right;font-family:var(--mono)}
+
+/* ── Ask article button ── */
+.ask-article-btn{padding:3px 10px;border-radius:99px;border:1px solid var(--accent-border);background:var(--accent-dim);color:var(--accent);font-family:var(--sans);font-size:11px;cursor:pointer;transition:all .12s;font-weight:500}
+.ask-article-btn:hover{background:var(--accent);color:#fff}
+
+/* ── Terminal-style lab commands ── */
+.lab-step-cmd{background:#0d0d10;border:1px solid #1e2030;padding:10px 12px 10px 36px;color:#a5f3a5;position:relative}
+.lab-step-cmd::before{content:'$';position:absolute;left:12px;top:10px;color:#6ee7b7;font-weight:600;font-family:var(--mono)}
+
+/* ── Pulsing unread dot ── */
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.45)}}
+.newdot{animation:pulse-dot 1.8s ease-in-out infinite}
+
+/* ── Progressive disclosure ── */
+.more-sections.collapsed{display:none}
+.more-sections-btn{display:block;width:100%;padding:9px 0;background:none;border:none;border-top:1px solid var(--border);color:var(--accent);font-family:var(--sans);font-size:12px;cursor:pointer;text-align:center;margin-top:12px;transition:color .12s;letter-spacing:.3px}
+.more-sections-btn:hover{color:var(--bright)}
+
+/* ── Flashcard progress bar ── */
+.fc-progress-bar{flex:1;height:3px;background:var(--bg4);border-radius:99px;overflow:hidden;max-width:280px}
+#fc-progress-fill{height:100%;background:var(--accent);border-radius:99px;transition:width .3s ease;width:0%}
+
+/* ── Card enhancements ── */
+.card.sel{border-left:2px solid var(--accent)}
+.card-title{font-size:13.5px}
+
+/* ── Section typography overrides ── */
+.det-title{font-size:17px;font-weight:700}
+.dtext{font-size:13px}
+.dsec{border-left:2px solid var(--border);padding-left:10px}
+.dsec h3{letter-spacing:.8px}
+
+/* ── Write Note button ── */
+.hbtn-write{background:rgba(52,211,153,.12);color:#34d399;border-color:rgba(52,211,153,.3);font-weight:600}
+.hbtn-write:hover{background:rgba(52,211,153,.22);color:#6ee7b7;border-color:rgba(52,211,153,.5)}
+
+/* ── My Notes sidebar button ── */
+.fb-personal{border-left:2px solid #34d399 !important;background:rgba(52,211,153,.05) !important}
+.fb-personal .fb-row span:first-child{color:#6ee7b7}
+.fb-personal.active{background:rgba(52,211,153,.12) !important}
+
+/* ── Personal article card badge ── */
+.personal-badge{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:2px 6px;border-radius:99px;background:rgba(52,211,153,.12);color:#34d399;border:1px solid rgba(52,211,153,.25);flex-shrink:0}
+
+/* ── Create/Edit Article Panel ── */
+#create-panel{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:160;
+  align-items:flex-start;justify-content:flex-end;backdrop-filter:blur(4px);
+}
+#create-panel.open{display:flex}
+#create-inner{
+  background:var(--bg2);border-left:1px solid var(--border);
+  width:100%;max-width:780px;height:100vh;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:-20px 0 60px rgba(0,0,0,.6);
+}
+.cp-header{
+  display:flex;align-items:center;gap:12px;padding:16px 20px;
+  border-bottom:1px solid var(--border);flex-shrink:0;background:var(--bg2);
+}
+.cp-title{font-size:15px;font-weight:700;color:var(--bright);flex:1}
+.cp-subtitle{font-size:11.5px;color:var(--muted);font-weight:400;margin-top:1px}
+.cp-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:0}
+.cp-section{margin-bottom:20px}
+.cp-section-hdr{
+  font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);
+  font-weight:700;padding:0 0 8px;border-bottom:1px solid var(--border);margin-bottom:14px;
+  display:flex;align-items:center;gap:6px;
+}
+.cp-section-hdr span{color:var(--accent);font-family:var(--mono)}
+.cp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cp-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.cp-field{display:flex;flex-direction:column;gap:5px}
+.cp-field.full{grid-column:1/-1}
+.cp-label{font-size:11px;color:var(--dim);font-weight:600;letter-spacing:.3px}
+.cp-label .req{color:var(--red);margin-left:2px}
+.cp-input,.cp-select,.cp-textarea{
+  background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);
+  color:var(--bright);font-family:var(--sans);font-size:13px;outline:none;
+  padding:8px 11px;transition:border-color .15s;width:100%;
+}
+.cp-input:focus,.cp-select:focus,.cp-textarea:focus{border-color:var(--accent);background:var(--bg)}
+.cp-input::placeholder,.cp-textarea::placeholder{color:var(--muted)}
+.cp-textarea{resize:vertical;line-height:1.7;min-height:80px;font-size:12.5px}
+.cp-textarea.tall{min-height:140px}
+.cp-textarea.xtall{min-height:200px}
+.cp-select option{background:var(--bg3)}
+.cp-footer{
+  padding:14px 20px;border-top:1px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;gap:10px;background:var(--bg2);
+}
+.cp-save{
+  background:var(--accent);color:#fff;border:none;border-radius:var(--r-md);
+  padding:9px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);
+  transition:opacity .15s;
+}
+.cp-save:hover{opacity:.88}
+.cp-save:disabled{opacity:.4;cursor:not-allowed}
+.cp-cancel{
+  background:none;border:1px solid var(--border);border-radius:var(--r-md);
+  color:var(--dim);padding:9px 16px;font-size:13px;cursor:pointer;font-family:var(--sans);
+  transition:all .12s;
+}
+.cp-cancel:hover{color:var(--bright);border-color:var(--text)}
+.cp-delete{
+  margin-left:auto;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);
+  border-radius:var(--r-md);color:var(--red);padding:9px 16px;font-size:13px;
+  cursor:pointer;font-family:var(--sans);transition:all .12s;
+}
+.cp-delete:hover{background:rgba(248,113,113,.2)}
+.cp-status-msg{font-size:12px;color:var(--green);display:none}
+.cp-err-msg{font-size:12px;color:var(--red);display:none}
+.section-divider{
+  display:flex;align-items:center;gap:10px;margin:4px 0 16px;
+}
+.section-divider-line{flex:1;height:1px;background:var(--border)}
+.section-divider-label{
+  font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);
+  font-weight:700;white-space:nowrap;padding:0 4px;
+}
+
+/* ── Light mode: remaining element fixes ── */
+[data-theme="light"] .mental-box{background:#f0fdf4;border-color:#bbf7d0}
+[data-theme="light"] .hook-box{background:#eef2ff;border-left-color:var(--accent)}
+[data-theme="light"] .beginner-box{background:#eff6ff}
+[data-theme="light"] .summary-box{background:#f8fafc;border-color:#e2e8f0;color:var(--dim)}
+[data-theme="light"] .tips-box{background:#faf5ff;border-left-color:var(--purple)}
+[data-theme="light"] .lab-overview{background:#eef2ff;border-left-color:var(--accent)}
+[data-theme="light"] .lab-defense{background:#eef2ff;border-left-color:var(--accent)}
+[data-theme="light"] .lab-success{background:#f0fdf4}
+[data-theme="light"] .newdot{background:var(--accent)}
+[data-theme="light"] .card{background:var(--bg2);border-color:var(--border)}
+[data-theme="light"] .card:hover{background:#f8fafc}
+[data-theme="light"] .card.sel{background:#f0f0f8;border-color:var(--accent)}
+[data-theme="light"] .det-header{background:var(--bg2)}
+[data-theme="light"] .level-banner{background:#f8fafc}
+[data-theme="light"] .stbtn{border-color:var(--border);color:var(--dim)}
+[data-theme="light"] .tool{background:#f1f5f9;color:var(--dim)}
+[data-theme="light"] .mutation-text{color:var(--text)}
+[data-theme="light"] .chat-hdr{background:var(--bg3)}
+[data-theme="light"] #chat-msgs{background:var(--bg2)}
+[data-theme="light"] .cmsg-ai{background:#f1f5f9;border-color:#e2e8f0}
+[data-theme="light"] #chat-inp{background:var(--bg2)}
+[data-theme="light"] .streak-box{background:var(--bg3);border-color:var(--border)}
+[data-theme="light"] .vuln-bar-track{background:var(--bg4)}
+[data-theme="light"] .fc-counter{background:var(--bg4);border-color:var(--border)}
+[data-theme="light"] .fc-progress-bar{background:var(--bg4)}
+[data-theme="light"] .sort-sel{background:var(--bg2);color:var(--text)}
+[data-theme="light"] .list-header{background:var(--bg2)}
+[data-theme="light"] .notes-area{background:var(--bg3);color:var(--text)}
+.kb-entry-pill{padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;color:var(--dim);border:1px solid transparent;word-break:break-word;transition:background .15s}
+.kb-entry-pill:hover{background:var(--bg2)}
+.kb-entry-pill.active{background:var(--surface2,#1e2433);border-color:var(--teal,#14b8a6);color:var(--fg)}
 </style>
 </head>
 <body>
@@ -625,6 +901,8 @@ header{
     </div>
     <button class="hbtn hbtn-flash" onclick="openFlashcards()">Flashcards</button>
     <button class="hbtn" onclick="openStats()">Stats</button>
+    <button class="hbtn" onclick="openKb()" style="background:var(--teal,.14b8a6);color:#fff">KB</button>
+    <button class="hbtn hbtn-write" onclick="openCreate()">✏ Write Note</button>
     <button class="hbtn hbtn-import" onclick="openImport()">+ Import URL</button>
   </div>
   <div class="theme-switcher">
@@ -649,8 +927,17 @@ header{
   <button class="fb" id="top-btn" onclick="setFilter('score_min=9','top-btn')">
     <div class="fb-row"><span>Top Rated (9–10)</span><span class="fbadge" id="cnt-top">0</span></div>
   </button>
+  <button class="fb fb-personal" id="personal-btn" onclick="setFilter('source_type=personal','personal-btn')">
+    <div class="fb-row"><span>✏ My Notes</span><span class="fbadge" id="cnt-personal">0</span></div>
+  </button>
 
   <div class="divider"></div>
+  <div class="streak-box" id="streak-badge">
+    <span class="streak-flame">🔥</span>
+    <span id="streak-count">1</span>
+    <span class="streak-label">day streak</span>
+  </div>
+
   <div class="sb-title">VAPT Learning Path</div>
 
   <button class="fb" id="lv-Foundation" onclick="setFilter('level=Foundation','lv-Foundation')">
@@ -685,6 +972,12 @@ header{
     <div class="fb-row"><span><span class="lvdot lvdot-Expert"></span>Expert</span><span class="fbadge" id="cnt-Expert">0</span></div>
     <div class="prog-row"><div class="prog-bar"><div class="prog-fill pf-Expert" id="pf-Expert" style="width:0%"></div></div><span class="prog-pct" id="pp-Expert">—</span></div>
   </button>
+
+  <div class="divider"></div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Coverage</div>
+    <div id="vuln-bars"></div>
+  </div>
 
   <div class="divider"></div>
   <div class="sb-title">By Severity</div>
@@ -734,6 +1027,7 @@ header{
 
   <!-- Detail panel -->
   <div id="detail-panel">
+    <div id="scroll-progress-bar"></div>
     <div id="detail-content"></div>
   </div>
 
@@ -797,11 +1091,49 @@ header{
   </div>
 </div>
 
+<!-- Knowledge Base Modal -->
+<div id="kb-modal" onclick="if(event.target===this)closeKb()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:150;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;width:860px;max-width:95vw;height:78vh;display:flex;flex-direction:column;overflow:hidden">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px">
+      <span style="font-weight:600;font-size:15px;color:var(--fg)">Knowledge Base</span>
+      <span style="color:var(--dim);font-size:13px">Your custom findings, injected into AI when generating notes for matching vuln types</span>
+      <button onclick="closeKb()" style="margin-left:auto;background:none;border:none;color:var(--dim);cursor:pointer;font-size:20px;line-height:1">×</button>
+    </div>
+    <div style="display:flex;flex:1;overflow:hidden">
+      <!-- Left: entry list -->
+      <div style="width:210px;border-right:1px solid var(--border);overflow-y:auto;padding:10px 8px">
+        <button onclick="kbNewEntry()" style="width:100%;padding:7px;background:var(--teal,#14b8a6);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;margin-bottom:8px">+ New Entry</button>
+        <div id="kb-list" style="display:flex;flex-direction:column;gap:4px"></div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:10px 0"/>
+        <div style="font-size:11px;color:var(--dim);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">PATT Payloads</div>
+        <div id="patt-status" style="font-size:11px;color:var(--dim);margin-bottom:6px">0/19 cached</div>
+        <button id="patt-sync-btn" onclick="syncPatt()" style="width:100%;padding:6px;background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:12px">Sync PATT</button>
+        <div id="patt-last-sync" style="font-size:10px;color:var(--dim);margin-top:4px;text-align:center"></div>
+      </div>
+      <!-- Right: editor -->
+      <div style="flex:1;display:flex;flex-direction:column;padding:16px;gap:10px;overflow:hidden">
+        <div style="display:flex;gap:8px;align-items:center">
+          <label style="font-size:12px;color:var(--dim);white-space:nowrap">Vuln Type</label>
+          <input id="kb-vuln-type" list="kb-types-list" placeholder="e.g. IDOR, XSS, SQLi..." style="flex:1;padding:7px 10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--fg);font-size:13px">
+          <datalist id="kb-types-list"></datalist>
+        </div>
+        <textarea id="kb-content" placeholder="Paste your findings, techniques, payloads, bypasses, notes for this vulnerability type...&#10;&#10;The AI will read these as context when generating notes for articles of this vuln type." style="flex:1;resize:none;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--fg);font-size:13px;font-family:inherit;line-height:1.6"></textarea>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button onclick="kbSave()" style="padding:8px 20px;background:var(--teal,#14b8a6);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:500">Save</button>
+          <button id="kb-delete-btn" onclick="kbDelete()" style="padding:8px 16px;background:transparent;color:var(--red,#f87171);border:1px solid var(--red,#f87171);border-radius:6px;cursor:pointer;font-size:13px;display:none">Delete</button>
+          <span id="kb-save-msg" style="font-size:12px;color:var(--dim)"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Flashcard Overlay -->
 <div id="fc-overlay">
   <div class="fc-header">
     <span class="fc-title">Flashcard Study</span>
     <span class="fc-counter" id="fc-counter">0 / 0</span>
+    <div class="fc-progress-bar"><div id="fc-progress-fill"></div></div>
     <select class="fc-level-sel" id="fc-level" onchange="loadFlashcards()">
       <option value="">All Levels</option>
       <option value="Foundation">Foundation</option>
@@ -876,9 +1208,131 @@ function setTheme(name) {
   setTheme(['dark','warm','light'].includes(t) ? t : 'dark');
 })();
 
+// ── Streak counter ─────────────────────────────────────────────────────────────
+function updateStreak() {
+  const today = new Date().toISOString().slice(0, 10);
+  const last  = localStorage.getItem('seckb_last_visit');
+  let streak  = parseInt(localStorage.getItem('seckb_streak') || '0', 10);
+
+  if (!last) {
+    streak = 1;
+  } else if (last === today) {
+    // same day — keep streak as is
+  } else {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    streak = last === yesterday ? streak + 1 : 1;
+  }
+
+  localStorage.setItem('seckb_last_visit', today);
+  localStorage.setItem('seckb_streak', streak);
+
+  const countEl = document.getElementById('streak-count');
+  if (countEl) countEl.textContent = streak;
+}
+
+// ── Vuln coverage bars ─────────────────────────────────────────────────────────
+function renderVulnCoverage(byCategory) {
+  const el = document.getElementById('vuln-bars');
+  if (!el || !byCategory.length) return;
+  const top8 = byCategory.slice(0, 8);
+  const max  = top8.reduce((m, r) => Math.max(m, r.n), 0);
+  el.innerHTML = top8.map(r => `
+    <div class="vuln-bar-row">
+      <span class="vuln-bar-name" title="${esc(r.category)}">${esc(r.category)}</span>
+      <div class="vuln-bar-track"><div class="vuln-bar-fill" style="width:${max > 0 ? Math.round(r.n / max * 100) : 0}%"></div></div>
+      <span class="vuln-bar-count">${r.n}</span>
+    </div>`).join('');
+}
+
+// ── Ask about this article ──────────────────────────────────────────────────────
+function askAboutArticle() {
+  const a = window._currentArticle;
+  if (!a) return;
+
+  const panel = document.getElementById('chat-panel');
+  panel.classList.add('open');
+  document.getElementById('chat-inp').focus();
+
+  // Reset to article-scoped context
+  chatHistory = [];
+  document.getElementById('chat-msgs').innerHTML = '';
+
+  const summary = a.one_line_summary || a.what_is_it || '';
+  const context = `I'm reading about "${a.title}" — a ${a.vapt_level}-level ${a.vulnerability_type || 'vulnerability'} (${a.severity} severity). ${summary}`.trim();
+  chatHistory.push({ role: 'user', content: context });
+  chatHistory.push({ role: 'assistant', content: `I can see you're studying "${a.title}". Ask me anything about this vulnerability — exploitation techniques, detection, payloads, or real-world scenarios.` });
+  appendChatMsg('ai', chatHistory[1].content);
+}
+
+// ── Burp Request Analyzer ─────────────────────────────────────────────────────
+async function analyzeRequest() {
+  const input = document.getElementById('analyze-req-input');
+  const btn   = document.getElementById('analyze-submit-btn');
+  const out   = document.getElementById('analyze-result-area');
+  const req   = input?.value?.trim();
+  if (!req) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Analyzing...';
+  out.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+
+  try {
+    const res = await fetch('/api/analyze-request', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ request: req })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    let html = '';
+    if (Array.isArray(data.vulns) && data.vulns.length) {
+      data.vulns.forEach(v => {
+        const conf = v.confidence || 'Medium';
+        html += `<div class="analyze-vuln-card">
+          <div class="analyze-vuln-name">
+            ${esc(v.name||'Unknown')}
+            <span class="analyze-conf conf-${conf}">${conf}</span>
+          </div>
+          ${v.location ? `<div class="analyze-row"><b>Location</b> ${esc(v.location)}</div>` : ''}
+          ${v.why      ? `<div class="analyze-row"><b>Why</b> ${esc(v.why)}</div>` : ''}
+          ${v.payload  ? `<div class="analyze-row"><b>Payload</b> <code class="h-code">${esc(v.payload)}</code></div>` : ''}
+          ${v.burp_steps ? `<div class="analyze-burp">${esc(v.burp_steps)}</div>` : ''}
+        </div>`;
+      });
+    } else {
+      html = '<div class="no-results"><p>No vulnerabilities identified. Try a different request or add more context.</p></div>';
+    }
+    if (data.headers_to_test?.length) {
+      html += `<div class="dsec" style="margin-top:12px"><h3 style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Headers to Test</h3>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">${data.headers_to_test.map(h=>`<span class="tool">${esc(h)}</span>`).join('')}</div></div>`;
+    }
+    if (data.notes) {
+      html += `<div class="summary-box" style="margin-top:10px"><b style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.8px">Notes</b><br>${esc(data.notes)}</div>`;
+    }
+    out.innerHTML = html;
+  } catch(e) {
+    out.innerHTML = `<div class="no-results"><p>Error: ${esc(e.message)}</p></div>`;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Analyze with AI';
+  }
+}
+
+// ── Progressive disclosure toggle ──────────────────────────────────────────────
+function toggleMoreSections(id) {
+  const el  = document.getElementById('more-sections-' + id);
+  const btn = document.getElementById('more-sections-btn-' + id);
+  if (!el || !btn) return;
+  el.classList.toggle('collapsed');
+  btn.textContent = el.classList.contains('collapsed') ? 'Show more sections ↓' : 'Show less ↑';
+}
+
 // ── Boot ──────────────────────────────────────────────────────────────────────
 async function boot() {
+  updateStreak();
   await Promise.all([loadStats(), loadProgress(), loadCatFilters(), loadArticles(), loadDailyChallenge()]);
+  updatePersonalCount();
 }
 
 // ── Stats ─────────────────────────────────────────────────────────────────────
@@ -907,6 +1361,7 @@ async function loadStats() {
       const el = document.getElementById(`cnt-${lv}`);
       if (el) el.textContent = lvMap[lv] || 0;
     });
+    renderVulnCoverage(s.byCategory || []);
   } catch(e) { console.error('stats error', e); }
 }
 
@@ -964,12 +1419,26 @@ function setFilter(filter, btnId) {
 }
 
 // ── Article list ──────────────────────────────────────────────────────────────
+function renderSkeletons() {
+  return Array(6).fill(0).map(() => `
+    <div class="card skeleton">
+      <div class="skel-line skel-title"></div>
+      <div class="skel-meta">
+        <div class="skel-line skel-badge"></div>
+        <div class="skel-line skel-badge"></div>
+        <div class="skel-line skel-badge"></div>
+      </div>
+    </div>`).join('');
+}
+
 async function loadArticles() {
   const search = document.getElementById('search').value.trim();
   const sort   = document.getElementById('sort-sel').value;
   let qs = activeFilter ? activeFilter + '&' : '';
   if (search) qs += 'search=' + encodeURIComponent(search) + '&';
   qs += 'limit=300';
+
+  document.getElementById('article-list').innerHTML = renderSkeletons();
 
   try {
     const res = await fetch('/api/articles?' + qs).then(r => r.json());
@@ -1011,7 +1480,10 @@ function renderList(arts) {
       ${a.has_notes?'<div class="notedot" title="Has notes">✎</div>':''}
       <div class="card-top">
         <div class="card-title">${esc(a.title)}</div>
-        <div class="card-score ${sc}">${a.quality_score||'?'}</div>
+        <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
+          ${a.source_type==='personal'?`<button class="personal-badge" onclick="event.stopPropagation();openEdit(${a.id})" title="Edit this note">✏ Edit</button>`:''}
+          <div class="card-score ${sc}">${a.quality_score||'?'}</div>
+        </div>
       </div>
       <div class="card-meta">
         <span class="badge ${sev}">${a.severity||'?'}</span>
@@ -1041,11 +1513,29 @@ async function openArticle(id, cardEl) {
 }
 
 function renderDetail(a) {
+  window._currentArticle = a;
   const lv = a.vapt_level || 'Medium';
   const stBtns = ['new','reviewed','practiced','mastered'].map(s =>
     `<button class="stbtn${a.status===s?' active-st':''}" onclick="setStatus(${a.id},'${s}',this)">${s}</button>`
   ).join('');
   const scoreColor = a.quality_score>=9?'var(--green)':a.quality_score>=7?'var(--cyan)':a.quality_score>=5?'var(--yellow)':'var(--muted)';
+
+  // Quick Reference: extract CWE, CVSS, OWASP from content
+  const allText = (a.root_cause||'') + ' ' + (a.what_is_it||'') + ' ' + (a.impact||'');
+  const cweM = allText.match(/CWE-(\d+)/i);
+  const cvssM = (a.impact||'').match(/(?:CVSS[^:]*:\s*|score[^:]*:\s*)([0-9]\.[0-9])/i) || (a.impact||'').match(/\b([89]\.[0-9]|10\.0|[67]\.[0-9])\b/);
+  const owaspM = allText.match(/\b(A0[0-9][\s:]+[\w\s&]+?)(?:\.|,|\n|CWE)/i);
+  const qref = {
+    cwe:   cweM  ? `CWE-${cweM[1]}` : null,
+    cvss:  cvssM ? cvssM[1] : null,
+    owasp: owaspM ? owaspM[1].trim().slice(0,28) : null,
+    tools: a.tools_used ? a.tools_used.split(',').slice(0,4).map(t=>t.trim()).join(' · ') : null
+  };
+
+  // Attack Flow: highlight stage based on vapt_level
+  const flowStage = {'Foundation':0,'Recon':0,'Low':1,'Medium':1,'High':2,'Critical':2,'Advanced':3,'Expert':3}[lv] ?? 2;
+  const flowSteps = ['Recon','Identify','Exploit','Impact'];
+  const flowHtml = flowSteps.map((s,i)=>`<span class="flow-step ${i<flowStage?'fs-done':i===flowStage?'fs-active':''}">${s}</span>${i<3?'<span class="flow-arr">→</span>':''}`).join('');
 
   document.getElementById('detail-content').innerHTML = `
     <div class="det-header">
@@ -1056,111 +1546,151 @@ function renderDetail(a) {
         <span class="badge b-vuln">${a.vulnerability_type||'—'}</span>
         <span style="color:${scoreColor};font-size:16px;font-weight:700">${a.quality_score}/10</span>
         ${a.source_url ? `<a class="src-link" href="${esc(a.source_url)}" target="_blank">↗ Read Original</a>` : ''}
+        ${a.source_type==='personal' ? `<button class="ask-article-btn" style="background:rgba(52,211,153,.12);color:#34d399;border-color:rgba(52,211,153,.3)" onclick="openEdit(${a.id})">Edit Note</button>` : ''}
+        <button class="ask-article-btn" onclick="askAboutArticle()">Ask AI</button>
       </div>
       <div class="det-actions">${stBtns}</div>
       <div class="det-tabs">
-        <button class="dtab active" id="tab-main"   onclick="openTab('main')">Overview</button>
-        <button class="dtab"        id="tab-bypass" onclick="openTab('bypass')">Bypass Techniques</button>
-        <button class="dtab"        id="tab-wild"   onclick="openTab('wild')">Find in Wild</button>
-        <button class="dtab"        id="tab-lab"    onclick="openTab('lab');loadLab(${a.id})">Lab</button>
-        <button class="dtab"        id="tab-notes"  onclick="openTab('notes')">Notes</button>
+        <button class="dtab active" id="tab-main"    onclick="openTab('main')">Overview</button>
+        <button class="dtab"        id="tab-exploit" onclick="openTab('exploit')">Exploit</button>
+        <button class="dtab"        id="tab-bypass"  onclick="openTab('bypass')">Bypass</button>
+        <button class="dtab"        id="tab-wild"    onclick="openTab('wild')">In Wild</button>
+        <button class="dtab"        id="tab-analyze" onclick="openTab('analyze')">Analyze</button>
+        <button class="dtab"        id="tab-lab"     onclick="openTab('lab');loadLab(${a.id})">Lab</button>
+        <button class="dtab"        id="tab-notes"   onclick="openTab('notes')">Notes</button>
       </div>
     </div>
 
-    <div class="level-banner">
-      <span class="level-pill lp-${lv}">${lv}</span>
-      <span style="color:var(--dim);font-size:12px">${esc(a.category||'')} &nbsp;·&nbsp; ${a.date_added||''}</span>
-      ${a.tools_used ? `<span style="margin-left:auto;color:var(--muted);font-size:11px">Tools: ${esc(a.tools_used)}</span>` : ''}
+    <!-- Quick Reference Strip -->
+    <div class="qref-strip">
+      <div class="qref-card" style="border-left:2px solid var(--accent)">
+        <div class="qref-label">Vuln Type</div>
+        <div class="qref-val">${esc(a.vulnerability_type||'—')}</div>
+      </div>
+      ${qref.cwe ? `<div class="qref-card qref-cwe"><div class="qref-label">CWE</div><div class="qref-val">${esc(qref.cwe)}</div></div>` : ''}
+      ${qref.cvss ? `<div class="qref-card qref-cvss"><div class="qref-label">CVSS</div><div class="qref-val">${esc(qref.cvss)}</div></div>` : ''}
+      <div class="qref-card"><div class="qref-label">Severity</div><div class="qref-val" style="color:var(--${a.severity==='Critical'?'red':a.severity==='High'?'orange':a.severity==='Medium'?'yellow':'cyan'})">${a.severity||'?'}</div></div>
+      <div class="qref-card"><div class="qref-label">Level</div><div class="qref-val" style="font-family:var(--sans);font-size:11px">${lv}</div></div>
+      ${qref.owasp ? `<div class="qref-card qref-owasp"><div class="qref-label">OWASP</div><div class="qref-val">${esc(qref.owasp)}</div></div>` : ''}
+      ${qref.tools ? `<div class="qref-card qref-tools" style="flex:1;min-width:120px"><div class="qref-label">Tools</div><div class="qref-val">${esc(qref.tools)}</div></div>` : ''}
     </div>
+
+    <!-- Attack Flow -->
+    <div class="attack-flow">${flowHtml}</div>
 
     <!-- TAB: OVERVIEW -->
     <div class="tab-pane active" id="pane-main">
       <div class="det-body">
+
+        ${(() => { try { const imgs = JSON.parse(a.image_urls||'[]'); if (imgs.length) return `<div class="article-images"><img class="article-img-featured" src="${esc(imgs[0])}" alt="" onerror="this.parentElement.style.display='none'" loading="lazy">${imgs.slice(1,4).map(u=>`<img class="article-img-thumb" src="${esc(u)}" alt="" onerror="this.style.display='none'" loading="lazy">`).join('')}</div>`; } catch(e){} return ''; })()}
 
         ${a.memory_hook ? `
         <div class="hook-box">
           <div class="text">${esc(a.memory_hook)}</div>
         </div>` : ''}
 
-        ${a.mental_model ? `
-        <div class="mental-box">
-          <div class="label">Mental Model</div>
-          <div class="text">${esc(a.mental_model)}</div>
-        </div>` : ''}
-
         ${a.one_line_summary ? `<div class="summary-box">${esc(a.one_line_summary)}</div>` : ''}
 
         ${a.what_is_it ? `
         <div class="beginner-box">
-          <div class="label">What Is This?</div>
-          <div class="text">${esc(a.what_is_it)}</div>
+          <div class="label">What Is It</div>
+          <div class="text">${fmt(a.what_is_it)}</div>
         </div>` : ''}
 
-        ${a.how_to_find_it           ? sec('How to Find It', a.how_to_find_it) : ''}
-        ${a.root_cause               ? sec('Root Cause',     a.root_cause) : ''}
-        ${a.exploitation_walkthrough ? sec('Exploitation Walkthrough', a.exploitation_walkthrough) : ''}
-
-        ${a.payloads_and_commands ? `
-        <div class="dsec">
-          <h3>Payloads & Commands</h3>
-          <div class="codeblock"><button class="copybtn" onclick="copyCode(this)">copy</button>${esc(a.payloads_and_commands)}</div>
+        ${a.mental_model ? `
+        <div class="mental-box">
+          <div class="label">How It Works</div>
+          <div class="text">${fmt(a.mental_model)}</div>
         </div>` : ''}
 
-        ${a.impact                 ? sec('Impact',                 a.impact) : ''}
-        ${a.chaining_opportunities ? sec('Chaining Opportunities', a.chaining_opportunities) : ''}
-        ${a.detection_and_hunting  ? sec('Detection & Hunting',    a.detection_and_hunting) : ''}
-        ${a.remediation            ? sec('Remediation',            a.remediation) : ''}
-        ${a.key_takeaways          ? sec('Key Takeaways',          a.key_takeaways) : ''}
+        ${a.key_takeaways ? sec('Mandatory Keywords', a.key_takeaways) : ''}
+        ${a.root_cause    ? sec('Root Cause', a.root_cause) : ''}
+        ${a.impact        ? sec('Impact + CVSS', a.impact) : ''}
 
         ${a.difficulty_tips ? `
         <div class="dsec">
-          <h3>Level Tips — ${lv}</h3>
-          <div class="tips-box"><div class="text">${esc(a.difficulty_tips)}</div></div>
+          <h3>Interview Challenge</h3>
+          <div class="interview-box"><div class="text">${fmt(a.difficulty_tips)}</div></div>
         </div>` : ''}
 
       </div>
     </div>
 
-    <!-- TAB: BYPASS TECHNIQUES -->
+    <!-- TAB: EXPLOIT -->
+    <div class="tab-pane" id="pane-exploit">
+      <div class="det-body">
+
+        ${a.how_to_find_it ? sec('Recon & Discovery', a.how_to_find_it) : ''}
+
+        ${a.exploitation_walkthrough ? sec('Burp Suite Test Cases', a.exploitation_walkthrough) : ''}
+
+        ${a.payloads_and_commands ? `
+        <div class="dsec">
+          <h3>Payloads & Commands</h3>
+          <div class="dtext">${fmt(a.payloads_and_commands)}</div>
+        </div>` : ''}
+
+        ${a.chaining_opportunities ? sec('Attack Chains', a.chaining_opportunities) : ''}
+
+      </div>
+    </div>
+
+    <!-- TAB: BYPASS -->
     <div class="tab-pane" id="pane-bypass">
       <div class="det-body">
         ${a.payload_mutations ? `
         <div class="dsec">
           <h3>Payload Mutations & WAF Bypass</h3>
           ${renderMutations(a.payload_mutations)}
-        </div>` : '<div class="no-results"><p>Payload mutations will appear once the AI pipeline processes articles with the updated prompt.</p></div>'}
+        </div>` : '<div class="no-results"><p>No bypass data yet — run backfill to populate.</p></div>'}
 
         ${a.custom_header_guide ? `
         <div class="dsec">
-          <h3>Custom Headers to Test</h3>
-          <div class="codeblock"><button class="copybtn" onclick="copyCode(this)">copy</button>${esc(a.custom_header_guide)}</div>
+          <h3>Headers to Inject</h3>
+          <div class="dtext">${fmt(a.custom_header_guide)}</div>
         </div>` : ''}
       </div>
     </div>
 
-    <!-- TAB: FIND IN WILD -->
+    <!-- TAB: IN WILD -->
     <div class="tab-pane" id="pane-wild">
       <div class="det-body">
         ${a.behavioral_indicators ? `
         <div class="wild-section">
           <div class="label">Behavioral Indicators</div>
-          <div class="text">${esc(a.behavioral_indicators)}</div>
+          <div class="text">${fmt(a.behavioral_indicators)}</div>
         </div>` : ''}
 
         ${a.where_to_look ? `
         <div class="wild-section" style="border-color:rgba(96,165,250,.2);background:rgba(96,165,250,.03)">
           <div class="label" style="color:var(--blue)">Where to Look First</div>
-          <div class="text">${esc(a.where_to_look)}</div>
+          <div class="text">${fmt(a.where_to_look)}</div>
         </div>` : ''}
 
         ${a.real_world_scenario ? `
         <div class="wild-section" style="border-color:rgba(234,179,8,.2);background:rgba(234,179,8,.03)">
           <div class="label" style="color:var(--yellow)">Real-World Scenario</div>
-          <div class="text">${esc(a.real_world_scenario)}</div>
+          <div class="text">${fmt(a.real_world_scenario)}</div>
         </div>` : ''}
 
+        ${a.detection_and_hunting ? sec('Detection & Hunting (Blue Team)', a.detection_and_hunting) : ''}
+        ${a.remediation ? sec('Remediation', a.remediation) : ''}
+
         ${!a.behavioral_indicators && !a.where_to_look && !a.real_world_scenario
-          ? '<div class="no-results"><p>Real-world finding guides will appear once the updated AI pipeline processes new articles.</p></div>' : ''}
+          ? '<div class="no-results"><p>Real-world guides will appear once the AI pipeline processes new articles.</p></div>' : ''}
+      </div>
+    </div>
+
+    <!-- TAB: ANALYZE REQUEST -->
+    <div class="tab-pane" id="pane-analyze">
+      <div class="det-body">
+        <div class="dsec">
+          <h3>Burp Request Analyzer</h3>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:10px">Paste a raw HTTP request below. AI will identify possible vulnerabilities and suggest Burp Suite testing steps.</p>
+          <textarea class="analyze-area" id="analyze-req-input" placeholder="POST /api/users/123 HTTP/1.1&#10;Host: target.com&#10;Authorization: Bearer eyJ...&#10;Content-Type: application/json&#10;&#10;{&quot;role&quot;:&quot;user&quot;,&quot;id&quot;:&quot;123&quot;}"></textarea>
+          <button class="analyze-btn" id="analyze-submit-btn" onclick="analyzeRequest()">Analyze with AI</button>
+          <div id="analyze-result-area" class="analyze-result"></div>
+        </div>
       </div>
     </div>
 
@@ -1199,8 +1729,16 @@ function renderMutations(raw) {
     html += `<div class="mutation-group">`;
     if (curGroup) html += `<h4>${esc(curGroup)}</h4>`;
     curItems.forEach(item => {
-      html += `<div class="mutation-entry">
-        <div class="mutation-text">${esc(item)}</div>
+      // Split pipe-separated "technique | payload | why" into styled columns
+      const parts = item.split(' | ');
+      let inner;
+      if (parts.length >= 2) {
+        inner = `<div class="fmt-row" style="margin:0;flex:1">${parts.map((p,idx)=>`<span class="fmt-col c${idx}">${esc(p.trim())}</span>`).join('')}</div>`;
+      } else {
+        inner = `<div class="mutation-text">${esc(item)}</div>`;
+      }
+      html += `<div class="mutation-entry" style="align-items:stretch;gap:6px">
+        ${inner}
         <button class="mut-copy" onclick="navigator.clipboard.writeText(${JSON.stringify(item)}).then(()=>toast('Copied!'))">copy</button>
       </div>`;
     });
@@ -1411,7 +1949,7 @@ function openTab(name) {
 
 function sec(title, text) {
   if (!text) return '';
-  return `<div class="dsec"><h3>${title}</h3><div class="dtext">${esc(text)}</div></div>`;
+  return `<div class="dsec"><h3>${title}</h3><div class="dtext">${fmt(text)}</div></div>`;
 }
 
 function closeDetail() {
@@ -1462,6 +2000,179 @@ function openMTab(name) {
 }
 
 // ── Import URL ─────────────────────────────────────────────────────────────────
+// ── Create / Edit Article ─────────────────────────────────────────────────────
+let _editingArticleId = null;
+
+function openCreate() {
+  _editingArticleId = null;
+  document.getElementById('cp-title-label').textContent = '✏ Write New Note';
+  document.getElementById('cp-delete-btn').style.display = 'none';
+  document.getElementById('cp-save-btn').textContent = '💾 Save Note';
+  // Clear all fields
+  ['cp-title','cp-category','cp-vuln-type','cp-level','cp-severity','cp-score',
+   'cp-source-url','cp-summary','cp-what-is-it','cp-mental-model','cp-keywords',
+   'cp-exploitation','cp-chaining','cp-interview','cp-payloads','cp-how-to-find',
+   'cp-mutations','cp-root-cause','cp-impact','cp-detection','cp-remediation',
+   'cp-scenario','cp-personal-notes'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = el.tagName === 'SELECT' ? el.options[0].value : '';
+  });
+  // Reset select defaults
+  document.getElementById('cp-level').value    = 'Medium';
+  document.getElementById('cp-severity').value = 'Medium';
+  document.getElementById('cp-score').value    = '8';
+  document.getElementById('cp-category').value = 'Personal Notes';
+  document.getElementById('cp-status').style.display = 'none';
+  document.getElementById('cp-err').style.display    = 'none';
+  document.getElementById('create-panel').classList.add('open');
+  document.getElementById('cp-title').focus();
+}
+
+async function openEdit(id) {
+  _editingArticleId = id;
+  const a = await fetch(`/api/articles/${id}`).then(r => r.json());
+  document.getElementById('cp-title-label').textContent = '✏ Edit Note';
+  document.getElementById('cp-delete-btn').style.display = 'block';
+  document.getElementById('cp-save-btn').textContent = '💾 Update Note';
+
+  const set = (elId, val) => { const el = document.getElementById(elId); if (el) el.value = val || ''; };
+  set('cp-title',          a.title);
+  set('cp-category',       a.category);
+  set('cp-vuln-type',      a.vulnerability_type);
+  set('cp-level',          a.vapt_level);
+  set('cp-severity',       a.severity);
+  set('cp-score',          a.quality_score);
+  set('cp-source-url',     a.source_url);
+  set('cp-summary',        a.one_line_summary);
+  set('cp-what-is-it',     a.what_is_it);
+  set('cp-mental-model',   a.mental_model);
+  set('cp-keywords',       a.key_takeaways);
+  set('cp-exploitation',   a.exploitation_walkthrough);
+  set('cp-chaining',       a.chaining_opportunities);
+  set('cp-interview',      a.difficulty_tips);
+  set('cp-payloads',       a.payloads_and_commands);
+  set('cp-how-to-find',    a.how_to_find_it);
+  set('cp-mutations',      a.payload_mutations);
+  set('cp-root-cause',     a.root_cause);
+  set('cp-impact',         a.impact);
+  set('cp-detection',      a.detection_and_hunting);
+  set('cp-remediation',    a.remediation);
+  set('cp-scenario',       a.real_world_scenario);
+  set('cp-personal-notes', a.personal_notes);
+
+  document.getElementById('cp-status').style.display = 'none';
+  document.getElementById('cp-err').style.display    = 'none';
+  document.getElementById('create-panel').classList.add('open');
+  document.getElementById('cp-title').focus();
+}
+
+function closeCreate() {
+  document.getElementById('create-panel').classList.remove('open');
+  _editingArticleId = null;
+}
+
+async function saveArticle() {
+  const title = document.getElementById('cp-title').value.trim();
+  if (!title) {
+    const err = document.getElementById('cp-err');
+    err.textContent = 'Title is required.'; err.style.display = 'inline';
+    document.getElementById('cp-title').focus(); return;
+  }
+
+  const btn = document.getElementById('cp-save-btn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  document.getElementById('cp-status').style.display = 'none';
+  document.getElementById('cp-err').style.display    = 'none';
+
+  const payload = {
+    title,
+    category:                 document.getElementById('cp-category').value,
+    vulnerability_type:       document.getElementById('cp-vuln-type').value.trim() || 'Other',
+    vapt_level:               document.getElementById('cp-level').value,
+    severity:                 document.getElementById('cp-severity').value,
+    quality_score:            parseInt(document.getElementById('cp-score').value) || 8,
+    source_url:               document.getElementById('cp-source-url').value.trim() || null,
+    one_line_summary:         document.getElementById('cp-summary').value.trim(),
+    what_is_it:               document.getElementById('cp-what-is-it').value,
+    mental_model:             document.getElementById('cp-mental-model').value,
+    key_takeaways:            document.getElementById('cp-keywords').value,
+    exploitation_walkthrough: document.getElementById('cp-exploitation').value,
+    chaining_opportunities:   document.getElementById('cp-chaining').value,
+    difficulty_tips:          document.getElementById('cp-interview').value,
+    payloads_and_commands:    document.getElementById('cp-payloads').value,
+    how_to_find_it:           document.getElementById('cp-how-to-find').value,
+    payload_mutations:        document.getElementById('cp-mutations').value,
+    root_cause:               document.getElementById('cp-root-cause').value,
+    impact:                   document.getElementById('cp-impact').value,
+    detection_and_hunting:    document.getElementById('cp-detection').value,
+    remediation:              document.getElementById('cp-remediation').value,
+    real_world_scenario:      document.getElementById('cp-scenario').value,
+    personal_notes:           document.getElementById('cp-personal-notes').value,
+    source_type:              'personal',
+    status:                   'new'
+  };
+
+  try {
+    let res;
+    if (_editingArticleId) {
+      res = await fetch(`/api/articles/${_editingArticleId}`, {
+        method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+      });
+    } else {
+      res = await fetch('/api/articles', {
+        method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+      });
+    }
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Save failed');
+
+    const statusEl = document.getElementById('cp-status');
+    statusEl.textContent = _editingArticleId ? '✓ Updated!' : '✓ Saved!';
+    statusEl.style.display = 'inline';
+    setTimeout(() => { statusEl.style.display = 'none'; }, 3000);
+
+    loadArticles();   // refresh list
+    loadStats();      // refresh counts
+    updatePersonalCount();
+    if (!_editingArticleId) {
+      // keep panel open so user can see the saved confirmation
+      _editingArticleId = data.id;
+      document.getElementById('cp-title-label').textContent = '✏ Edit Note';
+      document.getElementById('cp-delete-btn').style.display = 'block';
+      document.getElementById('cp-save-btn').textContent = '💾 Update Note';
+    }
+  } catch(e) {
+    const err = document.getElementById('cp-err');
+    err.textContent = e.message; err.style.display = 'inline';
+  }
+
+  btn.disabled = false;
+  btn.textContent = _editingArticleId ? '💾 Update Note' : '💾 Save Note';
+}
+
+async function deleteArticle() {
+  if (!_editingArticleId) return;
+  if (!confirm('Delete this personal note? This cannot be undone.')) return;
+  const res = await fetch(`/api/articles/${_editingArticleId}`, { method: 'DELETE' });
+  if (res.ok) {
+    closeCreate();
+    loadArticles();
+    loadStats();
+    updatePersonalCount();
+  } else {
+    const d = await res.json();
+    alert(d.error || 'Delete failed');
+  }
+}
+
+async function updatePersonalCount() {
+  try {
+    const d = await fetch('/api/articles?source_type=personal&limit=1').then(r => r.json());
+    const el = document.getElementById('cnt-personal');
+    if (el) el.textContent = d.total || 0;
+  } catch(e) {}
+}
+
 function openImport() {
   document.getElementById('import-modal').classList.add('open');
   document.getElementById('import-url-input').focus();
@@ -1746,6 +2457,8 @@ function renderFlashcard() {
   }
   const c = fcCards[fcIndex];
   document.getElementById('fc-counter').textContent = `${fcIndex + 1} / ${fcCards.length}`;
+  const fillEl = document.getElementById('fc-progress-fill');
+  if (fillEl) fillEl.style.width = (fcCards.length > 0 ? (fcIndex / fcCards.length * 100) : 0) + '%';
   document.getElementById('fc-vuln').textContent = c.title || c.vulnerability_type || '—';
   document.getElementById('fc-cat').textContent = `${c.vapt_level || ''} · ${c.category || ''} · ${c.severity || ''}`;
   document.getElementById('fc-mental').textContent = c.mental_model || c.key_takeaways || c.one_line_summary || 'Mental model will appear once articles are processed by the updated AI pipeline.';
@@ -1802,10 +2515,116 @@ function esc(s) {
   return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+// Smart content formatter — parses AI-generated plain text into rich HTML
+function fmt(text) {
+  if (!text) return '';
+  const E = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  // Inline highlighter: HTTP methods, tools, CWEs, status codes, arrows, backtick code
+  function hi(s) {
+    return E(s)
+      .replace(/\b(GET|POST|PUT|PATCH|DELETE|OPTIONS|HEAD)\b/g, '<b class="h-method">$1</b>')
+      .replace(/\b(curl|sqlmap|ffuf|nuclei|nmap|burpsuite|burp suite|metasploit|hydra|gobuster|wfuzz|nikto|dirsearch|subfinder|amass|httpx|gau|waybackurls|arjun|interactsh|xsstrike|commix|dalfox|corsy|smuggler)\b/gi, '<b class="h-tool">$1</b>')
+      .replace(/\b(CWE-\d+|CVE-\d{4}-\d+)\b/g, '<span class="h-cve">$1</span>')
+      .replace(/\b(200|201|204|301|302|307|308|400|401|403|404|405|422|429|500|502|503)\b(?!\d)/g, '<span class="h-status">$1</span>')
+      .replace(/→/g, '<span class="h-arrow">→</span>')
+      .replace(/ -&gt; /g, ' <span class="h-arrow">→</span> ')
+      .replace(/`([^`]{1,80})`/g, '<code class="h-code">$1</code>');
+  }
+
+  const lines = text.split('\n');
+  const out = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+    const t = line.trim();
+    i++;
+
+    if (!t) {
+      if (out.length && out[out.length-1] !== '<div class="fmt-gap"></div>') out.push('<div class="fmt-gap"></div>');
+      continue;
+    }
+
+    // Fenced code block
+    if (t.startsWith('```')) {
+      const cl = [];
+      while (i < lines.length && !lines[i].trim().startsWith('```')) { cl.push(lines[i]); i++; }
+      if (i < lines.length) i++;
+      out.push(`<div class="fmt-codeblock"><button class="copybtn" onclick="copyCode(this)">copy</button><pre>${E(cl.join('\n'))}</pre></div>`);
+      continue;
+    }
+
+    // Command / payload line detection
+    const isCmd = /^(\$ |curl |sqlmap|ffuf|nuclei|nmap|wget|python3? |node |ruby |php |cat |echo |dig |nc |netcat |bash |sh |git |docker )/i.test(t)
+      || /^(GET|POST|PUT|PATCH|DELETE|OPTIONS|HEAD) \//i.test(t)
+      || /^HTTP\/[12]/i.test(t)
+      || /^(BASIC:|ENCODED:|BLIND\/OOB:|POLYGLOT:|sqlmap:|ffuf:|nuclei:|TOOL:)\s/i.test(t)
+      || /^(<\?xml|<!DOCTYPE|<html|<script|<img |<svg|<input|<iframe)/i.test(t)
+      || /^(union\s|select\s|and\s+\d|or\s+\d|'|"|%27|%22|<script|javascript:)/i.test(t);
+
+    if (isCmd) { out.push(`<div class="fmt-cmd" title="Click to copy" onclick="navigator.clipboard.writeText(${JSON.stringify(t)}).then(()=>toast('Copied!'))">${E(t)}</div>`); continue; }
+
+    // Numbered step  "1." / "1)" / "Step 1:"
+    const stepM = t.match(/^(?:step\s+)?(\d+)[.)]\s+(.+)/i);
+    if (stepM) {
+      out.push(`<div class="fmt-step"><span class="fmt-stepnum">${stepM[1]}</span><span class="fmt-step-txt">${hi(stepM[2])}</span></div>`);
+      continue;
+    }
+
+    // KEY: value  (key is short, mostly uppercase or Title Case, no long lowercase runs)
+    const kvM = t.match(/^([A-Z][A-Za-z0-9 \/_\-]{1,35}):\s+(.+)$/);
+    if (kvM && !/[a-z]{5,}/.test(kvM[1].slice(1))) {
+      const key = kvM[1].trim(), val = kvM[2].trim();
+      const isLabel = /^(Target|Verify|Exploit|Expected|Impact|Name|Chain|Test Case|Splunk|Elastic|WAF|Network|Log|Anomaly|Payload|Tool|Basic|Encoded|Blind|OOB|Polyglot|Vulnerable|Secure|Fix|Input|Output)/i.test(key);
+      out.push(`<div class="fmt-kv${isLabel?' is-label':''}"><span class="fmt-kv-k">${E(key)}</span><span class="fmt-kv-c">:</span><span class="fmt-kv-v">${hi(val)}</span></div>`);
+      continue;
+    }
+
+    // Pipe-separated row "term | definition | pentest use"
+    if (t.includes(' | ') && t.split(' | ').length >= 2) {
+      const cols = t.split(' | ');
+      out.push(`<div class="fmt-row">${cols.map((c,idx)=>`<span class="fmt-col c${idx}">${hi(c.trim())}</span>`).join('')}</div>`);
+      continue;
+    }
+
+    // Bullet  "- " / "* " / "• " / "▸ "
+    if (/^[-*•▸]\s+/.test(t)) {
+      out.push(`<div class="fmt-bullet"><span class="fmt-dot">▸</span><span>${hi(t.replace(/^[-*•▸]\s+/,''))}</span></div>`);
+      continue;
+    }
+
+    // Arrow line  "If X → observe Y"
+    if (t.includes('→') || / -> /.test(t)) {
+      out.push(`<div class="fmt-arrow-row">${hi(t.replace(/ -> /g,' → '))}</div>`);
+      continue;
+    }
+
+    // ALL-CAPS section label  "PAYLOADS AND COMMANDS"
+    if (/^[A-Z][A-Z0-9 _\-/]{3,}$/.test(t) && t.length <= 50) {
+      out.push(`<div class="fmt-section-lbl">${E(t)}</div>`);
+      continue;
+    }
+
+    // Default paragraph
+    out.push(`<div class="fmt-p">${hi(t)}</div>`);
+  }
+
+  return out.join('');
+}
+
 // Search debounce
 document.getElementById('search').addEventListener('input', () => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(loadArticles, 300);
+});
+
+// Scroll progress bar
+document.getElementById('detail-panel').addEventListener('scroll', function() {
+  const bar = document.getElementById('scroll-progress-bar');
+  if (!bar) return;
+  const pct = this.scrollTop / (this.scrollHeight - this.clientHeight) * 100;
+  bar.style.width = (isNaN(pct) ? 0 : Math.min(pct, 100)) + '%';
 });
 
 // Keyboard shortcuts
@@ -1903,6 +2722,131 @@ async function sendChat() {
 }
 
 boot();
+
+// ── Knowledge Base ────────────────────────────────────────────────────────────
+let kbEntries = [];
+let kbCurrentId = null;
+
+async function openKb() {
+  document.getElementById('kb-modal').style.display = 'flex';
+  await kbLoadTypes();
+  await kbRefreshList();
+  pattLoadStatus();
+}
+
+function closeKb() {
+  document.getElementById('kb-modal').style.display = 'none';
+}
+
+async function kbLoadTypes() {
+  try {
+    const types = await fetch('/api/knowledge-base/types').then(r => r.json());
+    const dl = document.getElementById('kb-types-list');
+    dl.innerHTML = types.map(t => `<option value="${t}">`).join('');
+  } catch(e) {}
+}
+
+async function kbRefreshList() {
+  try {
+    kbEntries = await fetch('/api/knowledge-base').then(r => r.json());
+    const list = document.getElementById('kb-list');
+    if (kbEntries.length === 0) {
+      list.innerHTML = '<div style="font-size:12px;color:var(--dim);padding:8px 4px;text-align:center">No entries yet.<br>Click "+ New Entry"</div>';
+      return;
+    }
+    list.innerHTML = kbEntries.map(e =>
+      `<div class="kb-entry-pill${kbCurrentId === e.id ? ' active' : ''}" onclick="kbSelect(${e.id})">${e.vuln_type}</div>`
+    ).join('');
+  } catch(e) {}
+}
+
+function kbSelect(id) {
+  const entry = kbEntries.find(e => e.id === id);
+  if (!entry) return;
+  kbCurrentId = id;
+  document.getElementById('kb-vuln-type').value = entry.vuln_type;
+  document.getElementById('kb-content').value = entry.content;
+  document.getElementById('kb-delete-btn').style.display = '';
+  document.getElementById('kb-save-msg').textContent = '';
+  kbRefreshList();
+}
+
+function kbNewEntry() {
+  kbCurrentId = null;
+  document.getElementById('kb-vuln-type').value = '';
+  document.getElementById('kb-content').value = '';
+  document.getElementById('kb-delete-btn').style.display = 'none';
+  document.getElementById('kb-save-msg').textContent = '';
+  document.getElementById('kb-vuln-type').focus();
+  document.querySelectorAll('.kb-entry-pill').forEach(el => el.classList.remove('active'));
+}
+
+async function kbSave() {
+  const vuln_type = document.getElementById('kb-vuln-type').value.trim();
+  const content = document.getElementById('kb-content').value.trim();
+  const msg = document.getElementById('kb-save-msg');
+  if (!vuln_type) { msg.textContent = 'Vuln type required'; return; }
+  if (!content) { msg.textContent = 'Content required'; return; }
+  try {
+    msg.textContent = 'Saving...';
+    const saved = await fetch('/api/knowledge-base', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ vuln_type, content })
+    }).then(r => r.json());
+    kbCurrentId = saved.id;
+    msg.textContent = 'Saved';
+    await kbRefreshList();
+    document.getElementById('kb-delete-btn').style.display = '';
+    setTimeout(() => { msg.textContent = ''; }, 2000);
+  } catch(e) { msg.textContent = 'Error: ' + e.message; }
+}
+
+async function kbDelete() {
+  if (!kbCurrentId) return;
+  const vuln = document.getElementById('kb-vuln-type').value;
+  if (!confirm(`Delete KB entry for "${vuln}"?`)) return;
+  try {
+    await fetch(`/api/knowledge-base/${kbCurrentId}`, { method: 'DELETE' });
+    kbCurrentId = null;
+    kbNewEntry();
+    await kbRefreshList();
+  } catch(e) { alert('Delete failed: ' + e.message); }
+}
+
+async function pattLoadStatus() {
+  try {
+    const d = await fetch('/api/patt-cache').then(r => r.json());
+    document.getElementById('patt-status').textContent = `${d.cached.length}/${d.total} cached`;
+    const lastSync = d.cached.length
+      ? d.cached.reduce((a,b) => a.fetched_at > b.fetched_at ? a : b).fetched_at
+      : null;
+    document.getElementById('patt-last-sync').textContent = lastSync
+      ? 'Last: ' + new Date(lastSync).toLocaleDateString()
+      : '';
+  } catch(e) {}
+}
+
+async function syncPatt() {
+  const btn = document.getElementById('patt-sync-btn');
+  const status = document.getElementById('patt-status');
+  btn.disabled = true;
+  btn.textContent = 'Syncing...';
+  status.textContent = 'Fetching from GitHub...';
+  try {
+    const d = await fetch('/api/sync-patt', { method: 'POST' }).then(r => r.json());
+    const msg = d.failed && d.failed.length
+      ? `${d.synced} synced, ${d.failed.length} failed`
+      : `${d.synced}/19 synced`;
+    status.textContent = msg;
+    await pattLoadStatus();
+  } catch(e) {
+    status.textContent = 'Sync failed: ' + e.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Sync PATT';
+  }
+}
 </script>
 
 <!-- AI Chat Widget -->
@@ -1923,6 +2867,201 @@ boot();
     <button id="chat-send" onclick="sendChat()">↑</button>
   </div>
 </div>
+
+<!-- ── Create / Edit Article Panel ─────────────────────────────────────────── -->
+<div id="create-panel" onclick="if(event.target===this)closeCreate()">
+<div id="create-inner">
+
+  <div class="cp-header">
+    <div>
+      <div class="cp-title" id="cp-title-label">✏ Write New Note</div>
+      <div class="cp-subtitle">Saved to your personal knowledge base — separate from auto-imported articles</div>
+    </div>
+    <button class="cp-cancel" onclick="closeCreate()">✕ Close</button>
+  </div>
+
+  <div class="cp-body">
+
+    <!-- METADATA -->
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>◈</span> Article Metadata</div>
+      <div class="cp-field full" style="margin-bottom:12px">
+        <label class="cp-label">Title <span class="req">*</span></label>
+        <input class="cp-input" id="cp-title" placeholder="e.g. JWT Algorithm Confusion — RS256 to HS256 Bypass" />
+      </div>
+      <div class="cp-grid" style="margin-bottom:10px">
+        <div class="cp-field">
+          <label class="cp-label">Category</label>
+          <select class="cp-select" id="cp-category">
+            <option value="Personal Notes">Personal Notes</option>
+            <option value="Kali Linux">Kali Linux</option>
+            <option value="Methodology">Methodology</option>
+            <option value="Cheat Sheet">Cheat Sheet</option>
+            <option value="CTF Notes">CTF Notes</option>
+            <option value="Bug Bounty Notes">Bug Bounty Notes</option>
+            <option value="Tool Reference">Tool Reference</option>
+            <option value="Client-Side Attacks">Client-Side Attacks</option>
+            <option value="Injection Attacks">Injection Attacks</option>
+            <option value="Authentication & Sessions">Authentication & Sessions</option>
+            <option value="Broken Access Control">Broken Access Control</option>
+            <option value="Server-Side Attacks">Server-Side Attacks</option>
+            <option value="API & Web Services">API & Web Services</option>
+            <option value="Recon & Enumeration">Recon & Enumeration</option>
+            <option value="Cloud & Infrastructure">Cloud & Infrastructure</option>
+            <option value="Exploit Chaining">Exploit Chaining</option>
+          </select>
+        </div>
+        <div class="cp-field">
+          <label class="cp-label">Vulnerability Type</label>
+          <input class="cp-input" id="cp-vuln-type" placeholder="XSS, SQLi, IDOR, SSRF…" />
+        </div>
+      </div>
+      <div class="cp-grid-3">
+        <div class="cp-field">
+          <label class="cp-label">VAPT Level</label>
+          <select class="cp-select" id="cp-level">
+            <option>Foundation</option><option>Recon</option><option>Low</option>
+            <option selected>Medium</option><option>High</option>
+            <option>Critical</option><option>Advanced</option><option>Expert</option>
+          </select>
+        </div>
+        <div class="cp-field">
+          <label class="cp-label">Severity</label>
+          <select class="cp-select" id="cp-severity">
+            <option>Low</option><option selected>Medium</option>
+            <option>High</option><option>Critical</option>
+          </select>
+        </div>
+        <div class="cp-field">
+          <label class="cp-label">Quality Score (1–10)</label>
+          <input class="cp-input" id="cp-score" type="number" min="1" max="10" value="8" />
+        </div>
+      </div>
+      <div class="cp-grid" style="margin-top:10px">
+        <div class="cp-field">
+          <label class="cp-label">Source URL (optional)</label>
+          <input class="cp-input" id="cp-source-url" placeholder="https://…" />
+        </div>
+        <div class="cp-field">
+          <label class="cp-label">One-Line Summary</label>
+          <input class="cp-input" id="cp-summary" placeholder="Precise technical one-liner" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 SECTIONS -->
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>01</span> Topic Overview — What / Why / Where / How / Which</div>
+      <textarea class="cp-textarea xtall" id="cp-what-is-it"
+        placeholder="What: CWE number, OWASP category, trust boundary violated, attacker primitive&#10;Why: Root developer mistake that enables this&#10;Where: Real products/frameworks&#10;How: 4-step attack lifecycle&#10;Which: Most exposed industry verticals and why"></textarea>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>02</span> How It Works — Technical Breakdown</div>
+      <textarea class="cp-textarea xtall" id="cp-mental-model"
+        placeholder="Attack trigger: When [app does X without Y], sending [payload] to [endpoint] grants [primitive]&#10;&#10;Technical breakdown:&#10;[protocol/code-level steps]&#10;&#10;Raw HTTP request:&#10;[exact demonstrative request]&#10;&#10;Code-level mistake:&#10;[pseudocode]"></textarea>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>03</span> Mandatory Keywords</div>
+      <textarea class="cp-textarea tall" id="cp-keywords"
+        placeholder="TERM: [attack-context definition] | Pentest use: [how used] | Connected to: [related vulns]&#10;(7 terms, one per line)"></textarea>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>04</span> Pentest Test Cases</div>
+      <textarea class="cp-textarea xtall" id="cp-exploitation"
+        placeholder="Test Case 1 — [Name]&#10;Target: [exact endpoint/param]&#10;Verify: [confirm attack surface exists]&#10;Exploit:&#10;  curl -X POST https://target/api/... -d '...'&#10;Expected: [success indicator]&#10;Impact: [concrete outcome]&#10;&#10;Test Case 2 — ..."></textarea>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>05</span> Attacker Mindset — Chaining & Escalation</div>
+      <textarea class="cp-textarea tall" id="cp-chaining"
+        placeholder="Chain 1 — [Impact]: [VulnA] → [how] → [VulnB] → [result]&#10;Chain 2 — ...&#10;&#10;Escalation path:&#10;1. Initial: [low-impact find]&#10;2. Escalate: [next step]&#10;3. Maximize: [full impact]"></textarea>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>06</span> Interview Challenge</div>
+      <textarea class="cp-textarea tall" id="cp-interview"
+        placeholder="Q: [Real-world scenario with specific constraints]&#10;&#10;Expected answer:&#10;• ...&#10;&#10;Follow-up questions:&#10;• If you say [term]: 'Show me the exact HTTP request.'&#10;&#10;Junior mistakes: ..."></textarea>
+    </div>
+
+    <!-- SUPPORTING SECTIONS -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-label">Supporting Details</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>⚡</span> Payloads & Commands</div>
+      <textarea class="cp-textarea tall" id="cp-payloads"
+        placeholder="[BASIC]: &#10;[ENCODED]: &#10;[BLIND/OOB]: &#10;[POLYGLOT]: &#10;[TOOL]: ffuf/sqlmap/nuclei command with exact flags"></textarea>
+    </div>
+
+    <div class="cp-grid" style="gap:16px;margin-bottom:20px">
+      <div class="cp-field">
+        <label class="cp-label">Recon Checklist</label>
+        <textarea class="cp-textarea" id="cp-how-to-find"
+          placeholder="1. [step + exact command]&#10;2. ffuf -u TARGET/FUZZ -w /usr/share/seclists/...&#10;3. nuclei -u TARGET -t [template]"></textarea>
+      </div>
+      <div class="cp-field">
+        <label class="cp-label">WAF Bypass / Payload Mutations</label>
+        <textarea class="cp-textarea" id="cp-mutations"
+          placeholder="1. URL double-encode | %253C | WAF decodes once&#10;2. Case variation | SeLeCt | regex bypass&#10;3. Comment injection | SEL/**/ECT |"></textarea>
+      </div>
+    </div>
+
+    <div class="cp-grid" style="gap:16px;margin-bottom:20px">
+      <div class="cp-field">
+        <label class="cp-label">Root Cause (CWE)</label>
+        <textarea class="cp-textarea" id="cp-root-cause"
+          placeholder="CWE-[N]: [name]&#10;Mistake: [one sentence]&#10;Vulnerable: [pseudocode]&#10;Missing: [exact control]"></textarea>
+      </div>
+      <div class="cp-field">
+        <label class="cp-label">Impact + CVSS</label>
+        <textarea class="cp-textarea" id="cp-impact"
+          placeholder="1) Data: &#10;2) Actions: &#10;3) Lateral: &#10;4) CVSS: [score] CVSS:3.1/AV:.../...&#10;5) Compliance:"></textarea>
+      </div>
+    </div>
+
+    <div class="cp-grid" style="gap:16px;margin-bottom:20px">
+      <div class="cp-field">
+        <label class="cp-label">Detection & Hunting</label>
+        <textarea class="cp-textarea" id="cp-detection"
+          placeholder="Splunk: index=web_logs ...&#10;Elastic: ...&#10;WAF rule: ..."></textarea>
+      </div>
+      <div class="cp-field">
+        <label class="cp-label">Remediation</label>
+        <textarea class="cp-textarea" id="cp-remediation"
+          placeholder="Vulnerable:&#10;[code]&#10;&#10;Fixed:&#10;[code]&#10;&#10;Framework API: PreparedStatement / DOMPurify ..."></textarea>
+      </div>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>📖</span> Real-World Scenario</div>
+      <textarea class="cp-textarea xtall" id="cp-scenario"
+        placeholder="First person. Target type → recon tool output → exact endpoint → exploitation chain with commands → loot → severity. 200+ words. Include dead ends and the key insight that cracked it."></textarea>
+    </div>
+
+    <div class="cp-section">
+      <div class="cp-section-hdr"><span>📝</span> Personal Notes</div>
+      <textarea class="cp-textarea tall" id="cp-personal-notes"
+        placeholder="Your personal observations, lab results, custom payloads that worked…"></textarea>
+    </div>
+
+  </div><!-- /cp-body -->
+
+  <div class="cp-footer">
+    <button class="cp-save" id="cp-save-btn" onclick="saveArticle()">💾 Save Note</button>
+    <button class="cp-cancel" onclick="closeCreate()">Cancel</button>
+    <span class="cp-status-msg" id="cp-status">Saved!</span>
+    <span class="cp-err-msg"   id="cp-err"></span>
+    <button class="cp-delete" id="cp-delete-btn" onclick="deleteArticle()" style="display:none">🗑 Delete</button>
+  </div>
+
+</div><!-- /create-inner -->
+</div><!-- /create-panel -->
 
 </body>
 </html>
